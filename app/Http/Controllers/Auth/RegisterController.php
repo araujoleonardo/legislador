@@ -51,7 +51,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'last-name' => ['required', 'string', 'max:255'],
+            'sexo' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -67,7 +67,23 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
-            'last-name' => $data['last-name'],
+            'sexo' => $data['sexo'],
+            'dataNascimento' => $data['dataNascimento'],
+            'nomeMae' => $data['nomeMae'],
+            'nomePai' => $data['nomePai'],
+            'estadoCivil' => $data['estadoCivil'],
+            'profissao' => $data['profissao'],
+            'tituloEleitor' => $data['tituloEleitor'],
+            'zonaEleitoral' => $data['zonaEleitoral'],
+            'secaoEleitoral' => $data['secaoEleitoral'],
+            'RG' => $data['RG'],
+            'CPF' => $data['CPF'],
+            'cep' => $data['cep'],
+            'endereco' => $data['endereco'],
+            'numero' => $data['numero'],
+            'bairro' => $data['bairro'],
+            'regiao' => $data['regiao'],
+            'tempoResidencia' => $data['tempoResidencia'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);

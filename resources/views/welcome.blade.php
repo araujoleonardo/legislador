@@ -252,13 +252,13 @@
 
             <!-- Right Column -->
             <div class="col-sm-2">
-                <div class="card border bg-white rounded shadow p-3">
-                    <div class="w3-container">
-                        <p>Upcoming Events:</p>
-                        <img src="/img/avatar.png" alt="Forest" style="width:100%;">
-                        <p><strong>Holiday</strong></p>
-                        <p>Friday 15:00</p>
-                        <p><button class="w3-button w3-block w3-theme-l4">Info</button></p>
+                <div class="card border bg-white rounded shadow p-3 text-center">
+                    <div class="container">
+                        <h3>Junte-se a nossa comunidade!</h3>
+                        
+                        <p>Para usufruir do nosso fórum e participar conosco faça seu login, caso não seja cadastrado faça seu cadastro.</p>
+
+                        <a href="{{ route('register') }}" class="button btn-cadastro">Cadastrar-se</a>
                     </div>
                 </div>
                 <br>
@@ -299,16 +299,6 @@
 
         <!-- End Page Container -->
     </div>
-    <br>
-
-    <!-- Footer -->
-    <footer class="w3-container w3-theme-d3 w3-padding-16">
-        <h5>Footer</h5>
-    </footer>
-
-    <footer class="w3-container w3-theme-d5">
-        <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-    </footer>
 
     <script>
         // Accordion

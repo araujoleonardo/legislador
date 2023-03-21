@@ -1,0 +1,27 @@
+html, body, h1, h2, h3, h4, h5 {
+    font-family: "Open Sans", sans-serif
+}
+
+.button {
+    border: none;
+    display: inline-block;
+    padding: 8px 16px;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-cadastro {
+    background-color: #B5D5C5;
+    font-weight: bold;
+    color: #fff;
+    font-size: 1.5em;
+    width: 100%;
+    transition: all 0.3s ease 0s;
+}
+
+.btn-cadastro:hover {
+    background-color: #94AF9F;
+    color: #fff;
+}
+
