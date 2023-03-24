@@ -18,7 +18,7 @@ Route::get('/', function () {
 })->name('welcome');
 
 Route::get('/teste', function () {
-    return view('/layouts/dash');
+    return view('/layouts/app');
 });
 
 Auth::routes();
