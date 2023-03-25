@@ -12,10 +12,10 @@
             <div class="card o-hidden border-0 shadow-lg my-5">
                 <div class="card-body p-0">
                     <div class="row">
-                        <div class="col-lg-6 d-none d-lg-block">
+                        <div class="col-lg-5 d-none d-lg-block">
                             <img src="/img/login.svg" alt="">
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-7">
                             <div class="p-5">
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Bem Vindo!</h1>
@@ -24,9 +24,10 @@
                                 <form id="formAuthentication" class="user" method="POST" action="{{ route('login') }}">
                                     @csrf
 
-                                    <div class="form-group">
-                                        <input type="email" class="form-control form-control-user @error('email') is-invalid @enderror" name="email" id="email" placeholder="Entre com seu email..." value="{{ old('email') }}" required autocomplete="email" autofocus />
-                                        
+                                    <div class="col-sm-12 mt-4 mb-sm-0">
+                                        <input type="email" class="did-floating-input form-control form-control-user @error('email') is-invalid @enderror" name="email" id="email" value="{{ old('email') }}" required autocomplete="email" autofocus />
+                                        <label for="name" class="did-floating-label text-md-end mb-2">{{ __('E-mail') }}</label>
+
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -36,9 +37,10 @@
 
                                     <br>
 
-                                    <div class="form-group">
-                                        <input type="password" id="password" class="form-control form-control-user @error('password') is-invalid @enderror" name="password"
-                                        placeholder="Entre com a senha..." required autocomplete="current-password" aria-describedby="password"/>
+                                    <div class="col-sm-12 mt-4 mb-sm-0">
+                                        <input type="password" id="password" class="did-floating-input form-control form-control-user @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" aria-describedby="password"/>
+                                        <label for="password" class="did-floating-label text-md-end mb-2">{{ __('Senha') }}</label>
+
                                         @error('password')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -59,7 +61,7 @@
 
                                     <br>
 
-                                    <div class="mb-3">
+                                    <div class="mb-3 pl-4 pr-4">
                                         <button class="btn btn-primary btn-user btn-block" type="submit">Sign in</button>
                                     </div>
                                 </form>
