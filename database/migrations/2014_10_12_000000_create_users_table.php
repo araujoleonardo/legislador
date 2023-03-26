@@ -16,11 +16,11 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('sexo', ['Masculino', 'Feminino', 'Outro']);
+            $table->string('sexo');
             $table->date('dataNascimento')->nullable();
             $table->string('nomeMae')->nullable();
             $table->string('nomePai')->nullable();
-            $table->enum('estadoCivil', ['Casado', 'Solteiro', 'Viúvo', 'Divorciado', 'Outro']);
+            $table->string('estadoCivil')->nullable();
             $table->string('profissao')->nullable();
             $table->string('tituloEleitor')->nullable();
             $table->string('zonaEleitoral')->nullable();
@@ -33,6 +33,7 @@ class CreateUsersTable extends Migration
             $table->string('bairro')->nullable();
             $table->string('regiao')->nullable();
             $table->string('tempoResidencia')->nullable();
+            $table->boolean('ativo')->default(1);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

@@ -6,6 +6,7 @@
 .did-floating-label {
   position: absolute;
   pointer-events: none;
+  font-size: 12px !important;
   left: 35px;
   top: -13px;
   padding: 0 5px;

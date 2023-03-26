@@ -4,147 +4,234 @@
 
 @section('content')
 
-    <!-- Begin Page Content -->
     <div class="container-fluid">
-
-        <!-- Content Row -->
         <div class="row">
 
-            <!-- Pie Chart -->
-            <div class="col-xl-3 col-md-12">
-                <div class="card shadow mb-4">        
-                    <!-- Card Body -->
-                    <div class="card-body">
-                        <div class="chart-pie pt-4 pb-2">
-                            <canvas id="myPieChart"></canvas>
-                        </div>
-                        <div class="mt-4 text-center small">
-                            <span class="mr-2">
-                                <i class="fas fa-circle text-primary"></i> Direct
-                            </span>
-                            <span class="mr-2">
-                                <i class="fas fa-circle text-success"></i> Social
-                            </span>
-                            <span class="mr-2">
-                                <i class="fas fa-circle text-info"></i> Referral
-                            </span>
-                        </div>
+            <div class="col-md-3">
+
+                <div class="card shadow mb-3">
+                    <div class="m-3">
+                        <p><a href="#">My Profile</a></p>
+                        <img src="/img/avatar.png" class="img-circle" height="65" width="65" alt="Avatar">
                     </div>
                 </div>
-            </div>
 
-            <!-- Area Chart -->
-            <div class="col-xl-7 col-md-12">
-                <div class="card shadow mb-4">                    
-                    <!-- Card Body -->
-                    <div class="card-body">
-                        
-                        <div class="w3-col m12">
-                            <div class="w3-card w3-round w3-white">
-                                <div class="w3-container w3-padding">
-                                    <h6 class="w3-opacity">Social Media template by w3.css</h6>
-                                    <p contenteditable="true" class="w3-border w3-padding">Status: Feeling Blue</p>
-                                    <button type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button> 
-                                </div>
-                            </div>
-                        </div>
-
+                <div class="card shadow mb-3">
+                    <div class="m-3">
+                        <p><a href="#">Intereses</a></p>
+                        <p>
+                            <span class="badge badge-primary">News</span>
+                            <span class="badge badge-primary">W3Schools</span>
+                            <span class="badge badge-success">Labels</span>
+                            <span class="badge badge-info">Football</span>
+                            <span class="badge badge-warning">Gaming</span>
+                            <span class="badge badge-danger">Friends</span>
+                        </p>
                     </div>
                 </div>
-            </div>
 
-            <!-- Pie Chart -->
-            <div class="col-xl-2 col-md-12">
-                <div class="card shadow mb-4">
-                    <!-- Card Body -->
-                    <div class="card-body">
-                        <div class="chart-pie pt-4 pb-2">
-                            <canvas id="myPieChart"></canvas>
-                        </div>
-                        <div class="mt-4 text-center small">
-                            <span class="mr-2">
-                                <i class="fas fa-circle text-primary"></i> Direct
-                            </span>
-                            <span class="mr-2">
-                                <i class="fas fa-circle text-success"></i> Social
-                            </span>
-                            <span class="mr-2">
-                                <i class="fas fa-circle text-info"></i> Referral
-                            </span>
-                        </div>
-                    </div>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
+
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
             </div>
-        </div>
 
-        <!-- Content Row -->
-        <div class="row">
 
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-12 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    Earnings (Monthly)</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+            <div class="col-md-7">
+
+                <div class="row">
+                    <div class="col-sm-12 card shadow mb-3">
+                        <div class="panel panel-default text-left m-3">
+                            <div class="card-body">
+                                <form>                            
+                                    <textarea id="post" name="post" placeholder="Digite sua mensagem..."></textarea>
+
+                                    <button class="btn-post" type="submit"><i class="bi bi-send-fill"></i> Postar</button>
+                                </form>                                   
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-7 col-md-12 mb-4">
-                <div class="card border-left-info shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks</div>
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col-auto">
-                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                <div class="row">
+                    <div class="col-sm-12 card shadow mb-3">
+                        <div class="panel panel-default text-left m-3">
+                            <div class="card-body">
+                                <h6 class="card-subtitle text-success"><i class="fa fa-university"></i> Law</h6>
+                                <hr class="my-3">
+                                <div class="row">
+                                    <div class="col-md-3 ">
+                                        <a href="#">
+                                            <img class="card-img-top rounded" src="http://adamthemes.com/demo/code/cards/images/blog01.jpeg" alt="">
+                                        </a>
                                     </div>
-                                    <div class="col">
-                                        <div class="progress progress-sm mr-2">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: 50%"
-                                                aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="col-md-9">
+                                        <h4 class="card-title">
+                                            <a href="#">Lorem ipsum dolor sit amet.</a>
+                                        </h4>
+                                        <p class="card-text"> Lorem ipsum dolor sit amet, consectetur adipis cingelit.
+                                            Etiam lacinia elit et placerat finibus. Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+                                            Consectetur iste laboriosam, similique reprehenderit quae est eos vel, 
+                                            aliquid nemo dolor aspernatur harum doloremque necessitatibus explicabo dolorem quaerat sequi veritatis velit!</p>
+                                    </div>
+                                </div>
+                                <hr class="my-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center author">
+                                        <a href="#">
+                                            <img src="http://adamthemes.com/demo/code/cards/images/avatar2.png" alt="..." class="avatar img-raised">
+                                            <span class="ms-3">Dany Clark</span>
+                                        </a>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="mr-3">
+                                            <span class="text-dark" style="font-size: 13px"><i class="bi bi-chat-dots-fill"></i> 145 </span>                                         
                                         </div>
+
+                                        <div>
+                                            <span class="text-dark" style="font-size: 13px"><i class="bi bi-clock-fill"></i> 10min</span> 
+                                        </div>                                   
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-auto">
-                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12 card shadow mb-3">
+                        <div class="panel panel-default text-left m-3">
+                            <div class="card-body">
+                                <h6 class="card-subtitle text-danger"><i class="bi bi-globe-americas"></i> World</h6>
+                                <hr class="my-3">
+                                <div class="row">
+                                    <div class="col-md-3 ">
+                                        <a href="#">
+                                            <img class="card-img-top rounded" src="http://adamthemes.com/demo/code/cards/images/blog01.jpeg" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h4 class="card-title">
+                                            <a href="#">Lorem ipsum dolor sit amet.</a>
+                                        </h4>
+                                        <p class="card-text"> Lorem ipsum dolor sit amet, consectetur adipis cingelit.
+                                            Etiam lacinia elit et placerat finibus. Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+                                            Consectetur iste laboriosam, similique reprehenderit quae est eos vel, 
+                                            aliquid nemo dolor aspernatur harum doloremque necessitatibus explicabo dolorem quaerat sequi veritatis velit!</p>
+                                    </div>
+                                </div>
+                                <hr class="my-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center author">
+                                        <a href="#">
+                                            <img src="http://adamthemes.com/demo/code/cards/images/avatar3.png" alt="..." class="avatar img-raised">
+                                            <span class="ms-3">Gabriil Garyc</span>
+                                        </a>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="mr-3">
+                                            <span class="text-dark" style="font-size: 13px"><i class="bi bi-chat-dots-fill"></i> 145 </span>                                         
+                                        </div>
+
+                                        <div>
+                                            <span class="text-dark" style="font-size: 13px"><i class="bi bi-clock-fill"></i> 1h 5min</span> 
+                                        </div>                                    
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-sm-12 card shadow mb-3">
+                        <div class="panel panel-default text-left m-3">
+                            <div class="card-body">
+                                <h6 class="card-subtitle text-primary"><i class="bi bi-music-note-beamed"></i> Music</h6>
+                                <hr class="my-3">
+                                <div class="row">
+                                    <div class="col-md-3 ">
+                                        <a href="#">
+                                            <img class="card-img-top rounded" src="http://adamthemes.com/demo/code/cards/images/blog01.jpeg" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h4 class="card-title">
+                                            <a href="#">Lorem ipsum dolor sit amet.</a>
+                                        </h4>
+                                        <p class="card-text"> Lorem ipsum dolor sit amet, consectetur adipis cingelit.
+                                            Etiam lacinia elit et placerat finibus. Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+                                            Consectetur iste laboriosam, similique reprehenderit quae est eos vel, 
+                                            aliquid nemo dolor aspernatur harum doloremque necessitatibus explicabo dolorem quaerat sequi veritatis velit!</p>
+                                    </div>
+                                </div>
+                                <hr class="my-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex align-items-center author">
+                                        <a href="#">
+                                            <img src="http://adamthemes.com/demo/code/cards/images/avatar3.png" alt="..." class="avatar img-raised">
+                                            <span class="ms-3">Gabriil Garyc</span>
+                                        </a>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="mr-3">
+                                            <span class="text-dark" style="font-size: 13px"><i class="bi bi-chat-dots-fill"></i> 145 </span>                                         
+                                        </div>
+
+                                        <div>
+                                            <span class="text-dark" style="font-size: 13px"><i class="bi bi-clock-fill"></i> 1h 32min</span> 
+                                        </div>                                    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <!-- Pending Requests Card Example -->
-            <div class="col-xl-2 col-md-12 mb-4">
-                <div class="card border-left-warning shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                    Pending Requests</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-comments fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
+            <div class="col-md-2">
+
+                <div class="card shadow mb-3">
+                    <div class="m-3">
+                        <p>Upcoming Events:</p>
+                        <img src="/img/avatar.png" alt="Paris" width="200">
+                        <p><strong>Paris</strong></p>
+                        <p>Fri. 27 November 2015</p>
+                        <button class="btn btn-primary">Info</button>
                     </div>
                 </div>
+
+                <div class="card shadow mb-3">
+                    <div class="m-3">
+                        <p>ADS</p>
+                    </div>
+                </div>
+
+                <div class="card shadow mb-3">
+                    <div class="m-3">
+                        <p>ADS</p>
+                    </div>
+                </div>
+
+                <div class="card shadow mb-3">
+                    <div class="m-3">
+                        <p>ADS</p>
+                    </div>
+                </div>
+
             </div>
         </div>
-
     </div>
-    <!-- /.container-fluid -->
 
 @endsection

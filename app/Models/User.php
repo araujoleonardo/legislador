@@ -36,6 +36,7 @@ class User extends Authenticatable
         'bairro',
         'regiao',
         'tempoResidencia',
+        'ativo',
         'email',
         'password',
     ];

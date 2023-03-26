@@ -25,7 +25,7 @@
                                     @csrf
 
                                     <div class="col-sm-12 mt-4 mb-sm-0">
-                                        <input type="email" class="did-floating-input form-control form-control-user @error('email') is-invalid @enderror" name="email" id="email" value="{{ old('email') }}" required autocomplete="email" autofocus />
+                                        <input type="email" class="did-floating-input form-control @error('email') is-invalid @enderror" name="email" id="email" value="{{ old('email') }}" required autocomplete="email" autofocus />
                                         <label for="name" class="did-floating-label text-md-end mb-2">{{ __('E-mail') }}</label>
 
                                         @error('email')
@@ -38,7 +38,7 @@
                                     <br>
 
                                     <div class="col-sm-12 mt-4 mb-sm-0">
-                                        <input type="password" id="password" class="did-floating-input form-control form-control-user @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" aria-describedby="password"/>
+                                        <input type="password" id="password" class="did-floating-input form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" aria-describedby="password"/>
                                         <label for="password" class="did-floating-label text-md-end mb-2">{{ __('Senha') }}</label>
 
                                         @error('password')
