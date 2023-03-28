@@ -14,11 +14,9 @@
                         <div class="p-5">                            
                             
                             <form id="regForm" class="user" method="POST" action="{{ route('register') }}">
-                                @csrf                            
-                                
-                                <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Dados pessoais</h1>
-                                </div>
+                                @csrf
+
+                                <h5 class="text-center text-gray-900 mb-4">Dados pessoais</h5>
 
                                 <div class="form-group row">
 
@@ -119,9 +117,7 @@
 
                                 </div>
 
-                                <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Documentação</h1>
-                                </div>
+                                <h5 class="text-center text-gray-900 mb-4">Documentação</h5>
 
                                 <div class="form-group row">                      
                                     
@@ -181,9 +177,7 @@
                                     </div>
                                 </div>
 
-                                <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Endereço</h1>
-                                </div>
+                                <h5 class="text-center text-gray-900 mb-4">Endereço</h5>
 
                                 <div class="form-group row">         
                     
@@ -313,9 +307,7 @@
                                     
                                 </div>
 
-                                <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Dados de acesso</h1>
-                                </div>
+                                <h5 class="text-center text-gray-900 mb-4">Dados de acesso</h5>
 
                                 <div class="form-group row">               
                                     
