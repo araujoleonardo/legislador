@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,4 +20,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/cadastro', function () {
+    return view('usuario.cadastro');
+});
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+//usuarios
+Route::get('/usuario', [UserController::class, 'listar'])->name('user-list');
+Route::get('/usuario/create', [UserController::class, 'create'])->name('user-create');
+Route::post('/usuario/store', [UserController::class, 'store'])->name('user-store');

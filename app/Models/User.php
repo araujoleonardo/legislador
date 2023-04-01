@@ -21,6 +21,25 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'sexo',
+        'dataNascimento',
+        'nomeMae',
+        'nomePai',
+        'estadoCivil',
+        'profissao',
+        'tituloEleitor',
+        'zonaEleitoral',
+        'secaoEleitoral',
+        'RG',
+        'CPF',
+        'cep',
+        'endereco',
+        'numero',
+        'bairro',
+        'id_regiao',
+        'tempoResidencia',
+        'perfil',
+        'ativo'
     ];
 
     /**
@@ -41,4 +60,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function regiao()
+    {
+        return $this->hasOne(Regiao::class, 'id', 'id_regiao');
+    }
 }
