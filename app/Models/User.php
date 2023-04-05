@@ -17,10 +17,31 @@ class User extends Authenticatable
      *
      * @var array
      */
+    protected $primaryKey = 'id';
+    
     protected $fillable = [
         'name',
         'email',
         'password',
+        'sexo',
+        'dataNascimento',
+        'nomeMae',
+        'nomePai',
+        'estadoCivil',
+        'profissao',
+        'tituloEleitor',
+        'zonaEleitoral',
+        'secaoEleitoral',
+        'RG',
+        'CPF',
+        'cep',
+        'endereco',
+        'numero',
+        'bairro',
+        'id_regiao',
+        'tempoResidencia',
+        'perfil',
+        'ativo'
     ];
 
     /**
@@ -41,4 +62,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function regiao()
+    {
+        return $this->belongsTo(Regiao::class, 'id_regiao');
+    }
+
+    public function post()
+    {
+        return $this->hasMany(Post::class);
+    }
 }
