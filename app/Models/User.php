@@ -17,6 +17,8 @@ class User extends Authenticatable
      *
      * @var array
      */
+    protected $primaryKey = 'id';
+    
     protected $fillable = [
         'name',
         'email',
@@ -63,6 +65,11 @@ class User extends Authenticatable
 
     public function regiao()
     {
-        return $this->hasOne(Regiao::class, 'id', 'id_regiao');
+        return $this->belongsTo(Regiao::class, 'id_regiao');
+    }
+
+    public function post()
+    {
+        return $this->hasMany(Post::class);
     }
 }

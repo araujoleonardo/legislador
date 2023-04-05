@@ -16,6 +16,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('dist/css/style.min.css') }}" rel="stylesheet">
+    
+    @yield('css')
+
 </head>
 <body>
     <!-- Preloader -->
@@ -61,7 +64,7 @@
                     <ul class="navbar-nav float-right">
                 
                         <li class="nav-item">
-                            <a class="nav-link waves-effect waves-dark" href="" title="Home" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-home font-24"></i>
+                            <a class="nav-link waves-effect waves-dark" href="/" title="Home" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-home font-24"></i>
                             </a>
                         </li>
 
@@ -71,7 +74,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link waves-effect waves-dark" href="" title="Painel" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-view-dashboard font-24"></i>
+                            <a class="nav-link waves-effect waves-dark" href="/home" title="Painel" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-view-dashboard font-24"></i>
                             </a>
                         </li>
                 
@@ -95,12 +98,13 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31"></a>
+                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ asset('img/1.jpg') }}" alt="user" class="rounded-circle" width="31"></a>
                                 <div class="dropdown-menu dropdown-menu-right user-dd animated">
 
                                     <a class="dropdown-item" href="javascript:void(0)">
-                                        <img src="assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31">
-                                        {{ Auth::user()->name }} 
+                                        <img src="{{ asset('img/1.jpg') }}" alt="user" class="rounded-circle" width="31">
+                                        {{ Auth::user()->name }} /
+                                        {{ Auth::user()->perfil }} 
                                     </a>
 
                                     <div class="dropdown-divider"></div>
@@ -146,8 +150,8 @@
 
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-map"></i><span class="hide-menu">Região </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="icon-material.html" class="sidebar-link"><i class="fas fa-list"></i><span class="hide-menu"> Listar </span></a></li>
-                                <li class="sidebar-item"><a href="icon-fontawesome.html" class="sidebar-link"><i class="fas fa-edit"></i><span class="hide-menu"> Cadastrar </span></a></li>
+                                <li class="sidebar-item"><a href="{{ route('regiao-list') }}" class="sidebar-link"><i class="fas fa-list"></i><span class="hide-menu"> Listar </span></a></li>
+                                <li class="sidebar-item"><a href="{{ route('regiao-create') }}" class="sidebar-link"><i class="fas fa-edit"></i><span class="hide-menu"> Cadastrar </span></a></li>
                             </ul>
                         </li>
                         

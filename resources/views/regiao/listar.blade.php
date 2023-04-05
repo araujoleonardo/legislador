@@ -1,6 +1,6 @@
 @extends('layouts.dash')
 
-@section('title', 'Usuários')
+@section('title', 'Região')
 
 @section('content')
     
@@ -9,44 +9,38 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Usuários</h1>
+            <h1 class="h3 mb-0 text-gray-800">Regiões</h1>
         </div>
 
         <!-- DataTales Example -->
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Usuários ativos</h5>
+                <h5 class="card-title">Regiões cadastradas</h5>
                 <div class="table-responsive">
                     <table id="zero_config" class="table table-sm table-bordered">
                         <thead>
                             <tr>
+                                <th>Código</th>
                                 <th>Nome</th>
-                                <th>Nascimento</th>
-                                <th>Sexo</th>
-                                <th>Zona eleitoral</th>
-                                <th>Endereço</th>
-                                <th>Região</th>
+                                <th>Descrição</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($usuarios as $usuario)
+                            @foreach ($regioes as $regiao)
                                 <tr>
-                                    <td>{{ $usuario->name }}</td>
-                                    <td>{{ $usuario->dataNascimento }}</td>
-                                    <td>{{ $usuario->sexo }}</td>
-                                    <td>{{ $usuario->zonaEleitoral }}</td>
-                                    <td>{{ $usuario->endereco }}, {{ $usuario->numero }}</td>
-                                    <td>{{ $usuario->regiao->nome ?? '-' }}</td>
+                                    <td>{{ $regiao->id }}</td>
+                                    <td>{{ $regiao->nome }}</td>
+                                    <td>{{ $regiao->detalhes }}</td>
                                     <td>
                                         <div class="d-flex justify-content-center align-items-center">
                                             <div class="m-1">
-                                                <button class="btn btn-info btn-sm" title="Detalhes">
+                                                <button class="btn btn-info btn-sm">
                                                     <i class="fas fa-info-circle"></i>
                                                 </button>
                                             </div>
                                             <div class="m-1">
-                                                <button class="btn btn-primary btn-sm" title="Editar">
+                                                <button class="btn btn-primary btn-sm">
                                                     <i class="fas fa-edit"></i>
                                                 </button>
                                             </div>
@@ -54,7 +48,7 @@
                                                 <form action="" method="post">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="btn btn-danger btn-sm" type="submit" title="Inativar">
+                                                <button class="btn btn-danger btn-sm" type="submit">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                                 </form>
@@ -67,7 +61,7 @@
                     </table>
                 </div>
             </div>
-        </div>      
+        </div>
 
     </div>
 

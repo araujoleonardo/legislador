@@ -18,8 +18,12 @@
     {{-- <link rel="stylesheet" type="text/css" href="assets/libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"> --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/libs/quill/dist/quill.snow.css') }}">
 
+
     <!-- Styles -->
     <link href="{{ asset('dist/css/style.min.css') }}" rel="stylesheet">
+    
+    @yield('css')
+    
     <style>
         .dropdown-toggle::after {
             content: none;
@@ -39,7 +43,7 @@
         
     </style>
 </head>
-<body >
+<body style="background-color: #eeeeee">
     <!-- Preloader -->
     <div class="preloader">
         <div class="lds-ripple">
@@ -61,7 +65,7 @@
                 <ul class="navbar-nav ml-auto">
             
                     <li class="nav-item m-1">
-                        <a class="nav-link waves-effect waves-dark" href="" title="Home" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-home font-24"></i></a>
+                        <a class="nav-link waves-effect waves-dark" href="/" title="Home" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-home font-24"></i></a>
                     </li>
 
                     <li class="nav-item m-1">
@@ -69,7 +73,7 @@
                     </li>
 
                     <li class="nav-item m-1">
-                        <a class="nav-link waves-effect waves-dark" href="" title="Painel" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-view-dashboard font-24"></i></a>
+                        <a class="nav-link waves-effect waves-dark" href="/home" title="Painel" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-view-dashboard font-24"></i></a>
                     </li>
             
                     <li class="nav-item dropdown m-1">
@@ -97,8 +101,9 @@
                             <div class="dropdown-menu dropdown-menu-right user-dd animated">
 
                                 <a class="dropdown-item" href="javascript:void(0)">
-                                    <img src="{{asset('assets/images/users/1.jpg')}}" alt="user" class="rounded-circle" width="31">
-                                    {{ Auth::user()->name }} 
+                                    <img src="{{ asset('img/1.jpg') }}" alt="user" class="rounded-circle" width="31">
+                                        {{ Auth::user()->name }} /
+                                        {{ Auth::user()->perfil }}
                                 </a>
 
                                 <div class="dropdown-divider"></div>
@@ -123,30 +128,16 @@
                 </ul>
             </nav>
         </nav>
-
-        <!-- End Topbar header -->
-        
-        <!-- Page wrapper  -->
-
-        <div class="">   
     
-            <!-- Container fluid  -->
     
-            <div class="container-fluid">
+        <div class="container-fluid mt-4">
         
-                <!-- Start Page Content -->
-        
-                <main class="">
-                    @yield('content')
-                </main>
-                    
-                <!-- End PAge Content -->
-        
-            </div>
+            <main class="">
+                @yield('content')
+            </main>        
     
         </div>
 
-        <!-- End Page wrapper  -->
     </div>
 
     <!-- All Jquery -->

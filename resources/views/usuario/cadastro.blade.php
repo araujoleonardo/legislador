@@ -2,22 +2,56 @@
 
 @section('title', 'Cadastro de usuário')
 
+@section('css')
+    <style>
+        .form-upload{
+            color: #dddddd;
+            background:#333;
+            display: block;
+            margin: 0 auto;
+            padding: 10px;
+            text-align: center;
+            width: 250px;
+        }
+        
+        .input-personalizado{
+            cursor: pointer;
+        }
+        
+        .imagem{
+            max-width: 50%;
+        }
+        
+        .input-file{
+            display:none;
+        }
+    </style>
+@endsection
+
 @section('content')
 
     <div class="container">
-        <div class="card border-0 shadow-lg my-5" style="background-color: #eee">
+        <div class="card border-0 shadow-sm my-5">
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="p-5">                            
                             
-                            <form id="regForm" class="user" method="POST" action="{{ route('user-store') }}">
+                            <form id="regForm" class="user" method="POST" action="{{ route('user-store') }}" enctype="multipart/form-data">
                                 @csrf
 
                                 <h5 class="text-center text-gray-900 mb-4 text-primary">Dados pessoais</h5> <hr>
 
                                 <div class="form-group row">
+
+                                    <div class="form-upload">
+                                        <label class="input-personalizado">
+                                            <span class="botao-selecionar">Selecione foto de perfil </span>
+                                            <img class="imagem" />
+                                            <input type="file" class="input-file" accept="image/*">
+                                        </label>
+                                    </div>                                    
 
                                     <div class="col-sm-12 mt-2 mb-sm-0">
                                         <label for="name" class="did-floating-label text-md-end mb-2">{{ __('Nome completo') }}</label>
@@ -224,12 +258,15 @@
                                     </div>
                     
                                     <div class="col-sm-6 mt-4 mb-sm-0">
-                                        <label for="regiao" class="did-floating-label text-md-end mb-2">{{ __('Selecione a região') }}</label>
-                                        <select id="regiao" class="form-control did-floating-input @error('regiao') is-invalid @enderror" name="regiao" autocomplete="regiao">
+                                        <label for="id_regiao" class="did-floating-label text-md-end mb-2">{{ __('Selecione a região') }}</label>
+                                        <select id="id_regiao" class="form-control did-floating-input @error('id_regiao') is-invalid @enderror" name="id_regiao" autocomplete="id_regiao">
                                             <option value="">Selecione</option>
+                                            @foreach ($regioes as $regiao)
+                                                <option value="{{ $regiao->id }}" {{ old('id_regiao') == $regiao->id ? 'selected' : '' }}> {{ $regiao->nome }} </option>                                                
+                                            @endforeach
                                         </select>
                     
-                                        @error('regiao')
+                                        @error('id_regiao')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -307,10 +344,8 @@
 
     @section('js')
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
-        <script>
-            
+        <script>            
             $(document).ready(function(){
-
                 // Adiciona a máscara para o título de eleitor
                 $("#tituloEleitor").mask("9999.9999.9999");
 
@@ -322,9 +357,20 @@
 
                 // Adiciona a máscara para o CEP
                 $("#cep").mask("99999-999");
+
+                const a = document.querySelector.bind(document);
+
+                const previewImg = a('.imagem');
+                const fileChooser = a('.input-file');
+
+                fileChooser.onchange = e => {
+                    const fileToUpload = e.target.files.item(0);
+                    const reader = new FileReader();
+                    reader.onload = e => previewImg.src = e.target.result;
+                    reader.readAsDataURL(fileToUpload);
+                };               
                 
             });
-
         </script>
     @endsection
 @endsection

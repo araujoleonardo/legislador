@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Regiao;
 use Illuminate\Http\Request;
 
-class Regiao extends Controller
+class RegiaoController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function listar()
     {
-        //
+        $regioes = Regiao::get();
+
+        return view('regiao.listar', compact('regioes'));
     }
 
     /**
@@ -23,7 +26,7 @@ class Regiao extends Controller
      */
     public function create()
     {
-        //
+        return view('regiao.cadastro');
     }
 
     /**
@@ -34,7 +37,12 @@ class Regiao extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Regiao::create([
+            'nome'      => $request['nome'],
+            'detalhes'  => $request['detalhes'],
+        ]);
+
+        return redirect()->route('regiao-create')->with('status', 'O cadastro foi realizado!');
     }
 
     /**

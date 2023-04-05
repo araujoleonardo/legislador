@@ -7,7 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Regiao extends Model
 {
-    protected $table = 'regiao';
-
     use HasFactory;
+
+    protected $table = 'regiao';
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'nome',
+        'detalhes'
+    ];
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

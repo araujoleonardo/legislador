@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Regiao;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -16,7 +17,10 @@ class UserController extends Controller
      */
     public function listar()
     {
-        $usuarios = User::get();
+        $usuarios = User::where('perfil', 'usuario')
+        ->select('id', 'name', 'dataNascimento', 'sexo', 'zonaEleitoral', 'endereco', 'numero', 'id_regiao')
+        ->with('regiao:id,nome')
+        ->get();
 
         return view('usuario.listar', compact('usuarios'));
     }
@@ -28,7 +32,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('usuario.cadastro');
+        $regioes = Regiao::orderBy('nome', 'asc')->get();
+
+        return view('usuario.cadastro', compact('regioes'));
     }
 
     /**
@@ -39,57 +45,54 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-            'sexo' => 'required',
-            'dataNascimento' => 'required',
-            'nomeMae' => 'required',
-            'nomePai' => 'required',
-            'estadoCivil' => 'required',
-            'profissao' => 'required',
-            'tituloEleitor' => 'required',
-            'zonaEleitoral' => 'required',
-            'secaoEleitoral' => 'required',
-            'RG' => 'required',
-            'CPF' => 'required',
-            'cep' => 'required',
-            'endereco' => 'required',
-            'numero' => 'required',
-            'bairro' => 'required',
-            'id_regiao' => 'required',
-            'tempoResidencia' => 'required',
+        // $request->validate([
+        //     'name' => 'required',
+        //     'email' => 'required',
+        //     'password' => 'required',
+        //     'sexo' => 'required',
+        //     'dataNascimento' => 'required',
+        //     'nomeMae' => 'required',
+        //     'nomePai' => 'required',
+        //     'estadoCivil' => 'required',
+        //     'profissao' => 'required',
+        //     'tituloEleitor' => 'required',
+        //     'zonaEleitoral' => 'required',
+        //     'secaoEleitoral' => 'required',
+        //     'RG' => 'required',
+        //     'CPF' => 'required',
+        //     'cep' => 'required',
+        //     'endereco' => 'required',
+        //     'numero' => 'required',
+        //     'bairro' => 'required',
+        //     'id_regiao' => 'required',
+        //     'tempoResidencia' => 'required',
+        // ]);
+
+        User::create([
+            'name'              => $request['name'],
+            'sexo'              => $request['sexo'],
+            'dataNascimento'    => $request['dataNascimento'],
+            'nomeMae'           => $request['nomeMae'],
+            'nomePai'           => $request['nomePai'],
+            'estadoCivil'       => $request['estadoCivil'],
+            'profissao'         => $request['profissao'],
+            'tituloEleitor'     => $request['tituloEleitor'],
+            'zonaEleitoral'     => $request['zonaEleitoral'],
+            'secaoEleitoral'    => $request['secaoEleitoral'],
+            'RG'                => $request['RG'],
+            'CPF'               => $request['CPF'],
+            'cep'               => $request['cep'],
+            'endereco'          => $request['endereco'],
+            'numero'            => $request['numero'],
+            'bairro'            => $request['bairro'],
+            'id_regiao'         => $request['id_regiao'],
+            'tempoResidencia'   => $request['tempoResidencia'],
+            'email'             => $request['email'],
+            'perfil'            => 'usuario',
+            'password'          => Hash::make($request['password']),
         ]);
 
-        $usuario = new User();
-        $usuario->name = $request->name;
-        $usuario->email = $request->email;
-        $usuario->password = $request->password;
-        $usuario->sexo = $request->sexo;
-        $usuario->dataNascimento = $request->dataNascimento;
-        $usuario->nomeMae = $request->nomeMae;
-        $usuario->nomePai = $request->nomePai;
-        $usuario->estadoCivil = $request->estadoCivil;
-        $usuario->profissao = $request->profissao;
-        $usuario->tituloEleitor = $request->tituloEleitor;
-        $usuario->zonaEleitoral = $request->zonaEleitoral;
-        $usuario->secaoEleitoral = $request->secaoEleitoral;
-        $usuario->RG = $request->RG;
-        $usuario->CPF = $request->CPF;
-        $usuario->cep = $request->cep;
-        $usuario->endereco = $request->endereco;
-        $usuario->numero = $request->numero;
-        $usuario->bairro = $request->bairro;
-        $usuario->id_regiao = $request->id_regiao;
-        $usuario->tempoResidencia = $request->tempoResidencia;
-        $usuario->perfil = 'usuario';
-
-        dd($usuario);
-
-        $usuario->save();
-
-        return redirect()->view('usuario.cadastro')->with('session_sucesso', 'O cadastro foi realizado.');
+        return redirect()->route('user-create')->with('status', 'O cadastro foi realizado!');
 
     }
 

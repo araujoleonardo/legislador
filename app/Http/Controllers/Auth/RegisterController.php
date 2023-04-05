@@ -64,6 +64,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if (User::where('perfil', 'admin')->first()) {
+            abort(403);
+        }
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
