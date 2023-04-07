@@ -68,29 +68,45 @@ class UserController extends Controller
         //     'tempoResidencia' => 'required',
         // ]);
 
-        User::create([
-            'name'              => $request['name'],
-            'sexo'              => $request['sexo'],
-            'dataNascimento'    => $request['dataNascimento'],
-            'nomeMae'           => $request['nomeMae'],
-            'nomePai'           => $request['nomePai'],
-            'estadoCivil'       => $request['estadoCivil'],
-            'profissao'         => $request['profissao'],
-            'tituloEleitor'     => $request['tituloEleitor'],
-            'zonaEleitoral'     => $request['zonaEleitoral'],
-            'secaoEleitoral'    => $request['secaoEleitoral'],
-            'RG'                => $request['RG'],
-            'CPF'               => $request['CPF'],
-            'cep'               => $request['cep'],
-            'endereco'          => $request['endereco'],
-            'numero'            => $request['numero'],
-            'bairro'            => $request['bairro'],
-            'id_regiao'         => $request['id_regiao'],
-            'tempoResidencia'   => $request['tempoResidencia'],
-            'email'             => $request['email'],
-            'perfil'            => 'usuario',
-            'password'          => Hash::make($request['password']),
-        ]);
+        $user = new User();
+        $user->name              = $request->name;
+        $user->sexo              = $request->sexo;
+        $user->dataNascimento    = $request->dataNascimento;
+        $user->nomeMae           = $request->nomeMae;
+        $user->nomePai           = $request->nomePai;
+        $user->estadoCivil       = $request->estadoCivil;
+        $user->profissao         = $request->profissao;
+        $user->tituloEleitor     = $request->tituloEleitor;
+        $user->zonaEleitoral     = $request->zonaEleitoral;
+        $user->secaoEleitoral    = $request->secaoEleitoral;
+        $user->RG                = $request->RG;
+        $user->CPF               = $request->CPF;
+        $user->cep               = $request->cep;
+        $user->endereco          = $request->endereco;
+        $user->numero            = $request->numero;
+        $user->bairro            = $request->bairro;
+        $user->id_regiao         = $request->id_regiao;
+        $user->tempoResidencia   = $request->tempoResidencia;
+        $user->email             = $request->email;
+        $user->perfil            = 'Usuario';
+        $user->password          = Hash::make($request->password);
+
+        // Image Upload
+        if($request->hasFile('image') && $request->file('image')->isValid()) {
+
+            $requestImage = $request->image;
+
+            $extension = $requestImage->extension();
+
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+
+            $requestImage->move(public_path('img/users'), $imageName);
+
+            $user->image = $imageName;
+
+        }
+
+        $user->save();
 
         return redirect()->route('user-create')->with('status', 'O cadastro foi realizado!');
 

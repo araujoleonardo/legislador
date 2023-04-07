@@ -5,37 +5,24 @@
 @section('css')
 
     <style>
+        .collapsible-link {
+            width: 100%;
+            position: relative;
+            text-align: left;
+        }
+
         .collapsible-link::before {
-            content: '';
-            width: 14px;
-            height: 2px;
-            background: #333;
+            content: "+";
             position: absolute;
-            top: calc(50% - 1px);
-            right: 1rem;
+            top: 50%;
+            right: 0.8rem;
+            transform: translateY(-50%);
             display: block;
-            transition: all 0.3s;
+            font-size: 1.1rem;
         }
 
-        /* Vertical line */
-        .collapsible-link::after {
-            content: '';
-            width: 2px;
-            height: 14px;
-            background: #333;
-            position: absolute;
-            top: calc(50% - 7px);
-            right: calc(1rem + 6px);
-            display: block;
-            transition: all 0.3s;
-        }
-
-            .collapsible-link[aria-expanded='true']::after {
-            transform: rotate(90deg) translateX(-1px);
-        }
-
-            .collapsible-link[aria-expanded='true']::before {
-            transform: rotate(180deg);
+        .collapsible-link[aria-expanded="true"]::before {
+            content: "-";
         }
     </style>
 
@@ -45,50 +32,79 @@
 
     <div class="row">
         <div class="col-md-2">
+
             <div class="card shadow-sm">
-                <div class="card-header">
-                    <h3>Fóruns</h3>
+                <div class="card-body">
+                    <h4 class="card-subtitle"> Fóruns </h4>
+                    <hr class="my-3">
+
+                    <!-- Accordion -->
+                    <div id="accordionExample" class="accordion">
+
+                        <!-- Accordion item 1 -->
+                        <div class="card border">
+                            <div id="headingOne" class="card-header bg-white shadow-sm border-0">
+                                <h2 class="mb-0">
+                                    <button type="button" data-toggle="collapse" data-target="#collapseOne"
+                                        aria-expanded="false" aria-controls="collapseOne"
+                                        class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">
+                                        Forum Popular
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseOne" aria-labelledby="headingOne" data-parent="#accordionExample"
+                                class="collapse">
+                                <div class="card-body p-5">
+                                    <p class="font-weight-light m-0">
+                                        Em construção
+                                    </p>
+                                </div>
+                            </div>
+                        </div><!-- End -->
+
+                        <!-- Accordion item 2 -->
+                        <div class="card border">
+                            <div id="headingTwo" class="card-header bg-white shadow-sm border-0">
+                                <h2 class="mb-0">
+                                    <button type="button" data-toggle="collapse" data-target="#collapseTwo"
+                                        aria-expanded="false" aria-controls="collapseTwo"
+                                        class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">
+                                        Petições públicas
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseTwo" aria-labelledby="headingTwo" data-parent="#accordionExample"
+                                class="collapse">
+                                <div class="card-body p-5">
+                                    <p class="font-weight-light m-0">
+                                        Em construção
+                                    </p>
+                                </div>
+                            </div>
+                        </div><!-- End -->
+
+                        <!-- Accordion item 3 -->
+                        <div class="card border">
+                            <div id="headingThree" class="card-header bg-white shadow-sm border-0">
+                                <h2 class="mb-0">
+                                    <button type="button" data-toggle="collapse" data-target="#collapseThree"
+                                        aria-expanded="false" aria-controls="collapseThree"
+                                        class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">
+                                        Projetos de lei
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseThree" aria-labelledby="headingThree" data-parent="#accordionExample"
+                                class="collapse">
+                                <div class="card-body p-5">
+                                    <p class="font-weight-light m-0">
+                                        Em construção
+                                    </p>
+                                </div>
+                            </div>
+                        </div><!-- End -->
+                    </div><!-- End -->
                 </div>
-                <!-- Accordion -->
-                <div id="accordionExample" class="accordion shadow">
-
-                    <!-- Accordion item 1 -->
-                    <div class="card">
-                    <div id="headingOne" class="card-header bg-white shadow-sm border-0">
-                        <h6 class="mb-0 font-weight-bold">
-                            <a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="d-block position-relative text-dark text-uppercase collapsible-link py-2">
-                                Fórum popular
-                            </a>
-                        </h6>
-                    </div>
-                    <div id="collapseOne" aria-labelledby="headingOne" data-parent="#accordionExample" class="collapse">
-                        <div class="card-body p-5">
-                            <p class="font-weight-light m-0">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 
-                            </p>
-                        </div>
-                    </div>
-                    </div>
-
-                    <!-- Accordion item 2 -->
-                    <div class="card">
-                    <div id="headingTwo" class="card-header bg-white shadow-sm border-0">
-                        <h6 class="mb-0 font-weight-bold">
-                            <a href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="d-block position-relative collapsed text-dark text-uppercase collapsible-link py-2">
-                                Abaixo Assinado
-                            </a>
-                        </h6>
-                    </div>
-                    <div id="collapseTwo" aria-labelledby="headingTwo" data-parent="#accordionExample" class="collapse">
-                        <div class="card-body p-5">
-                            <p class="font-weight-light m-0">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                            </p>
-                        </div>
-                    </div>
-                    </div>
-                </div>                     
-
             </div>
 
             <div class="card shadow-sm">
@@ -106,14 +122,14 @@
             </div>
 
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                <strong>Lorem ipsum!</strong> Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
 
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                <strong>Lorem ipsum!</strong> Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -131,20 +147,18 @@
                             <td>
                                 <div class="card shadow-sm">
                                     <div class="card-body">
-                                        <h6 class="card-subtitle text-success"><i class="fa fa-university"></i> Popular </h6>
+                                        <h6 class="card-subtitle text-success"><i class="fa fa-university"></i> Popular
+                                        </h6>
                                         <hr class="my-3">
                                         <div class="row">
-                                            <div class="col-md-3 ">
-                                                <a href="#">
-                                                    <img class="card-img-top rounded"
-                                                        src="http://adamthemes.com/demo/code/cards/images/blog01.jpeg" alt="">
-                                                </a>
+                                            <div class="">
+                                                {!! $post->video !!}
                                             </div>
-                                            <div class="col-md-9">
+                                            <div class="">
                                                 <h4 class="card-title">
                                                     <a href="#"> {{ $post->title }} </a>
                                                 </h4>
-                                                <p class="card-text"> 
+                                                <p class="card-text">
                                                     {{ $post->content }}
                                                 </p>
                                             </div>
@@ -153,9 +167,9 @@
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="d-flex align-items-center author">
                                                 <a href="#">
-                                                    <img src="http://adamthemes.com/demo/code/cards/images/avatar2.png" alt="..."
-                                                        class="rounded-circle" width="50">
-                                                    <span class="ms-3">{{$post->user->name}}</span>
+                                                    <img src="http://adamthemes.com/demo/code/cards/images/avatar2.png"
+                                                        alt="..." class="rounded-circle" width="50">
+                                                    <span class="ms-3">{{ $post->user->name }}</span>
                                                 </a>
                                             </div>
                                             <div class="d-flex justify-content-between align-items-center">
@@ -165,7 +179,7 @@
                                                         145
                                                     </span>
                                                 </div>
-                    
+
                                                 <div>
                                                     <span class="text-dark" style="font-size: 15px">
                                                         <i class="fas fa-eye"></i>
@@ -178,7 +192,7 @@
                                 </div>
                             </td>
                         </tr>
-                    @endforeach                    
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -211,7 +225,7 @@
                     <img class="card-img-top rounded" src="http://adamthemes.com/demo/code/cards/images/blog01.jpeg"
                         alt="">
                 </div>
-            </div>           
+            </div>
 
         </div>
     </div>

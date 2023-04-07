@@ -41,6 +41,7 @@ class User extends Authenticatable
         'id_regiao',
         'tempoResidencia',
         'perfil',
+        'image',
         'ativo'
     ];
 

@@ -142,7 +142,9 @@
                                 </span>
                             @enderror
                         </div>
+
                         <br>
+
                         <div class="">
                             <label for="content" class="did-floating-label text-md-end mb-2">{{ __('Conteúdo:') }}</label>
                             <textarea id="content" class="form-control did-floating-input @error('content') is-invalid @enderror" name="content" value="{{ old('content') }}" rows="5"></textarea>
@@ -152,6 +154,29 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror                            
+                        </div>
+
+                        <br>
+                        
+                        <div class="row mt-3">
+                            <div class="col-sm-6">
+                                <label for="video" class="did-floating-label text-md-end mb-2">{{ __('Url do Youtube:') }}</label>
+                                <input id="video" type="text" class="form-control did-floating-input @error('video') is-invalid @enderror" name="video" value="{{ old('video') }}" autocomplete="video">
+            
+                                @error('video')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror                            
+                            </div>
+
+                            <div class="col-sm-6">
+                                <label for="image" class="did-floating-label text-md-end mb-2">{{ __('Imagem:') }}</label>
+                                <div class="custom-file mb-3">
+                                    <input type="file" class="custom-file-input" id="image" name="image">
+                                    <label class="custom-file-label" for="customFile">Clique para selecionar</label>
+                                </div>
+                            </div>
                         </div>
 
                         <br>
@@ -194,4 +219,13 @@
         </div>
     </div>
 
+@endsection
+
+@section('js')
+    <script>
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
 @endsection
