@@ -33,7 +33,8 @@ class CreateUsersTable extends Migration
             $table->string('bairro')->nullable();
             $table->integer('id_regiao')->index('id_regiao')->nullable();
             $table->string('tempoResidencia')->nullable();
-            $table->enum('perfil', ['admin', 'usuario']);
+            $table->string('perfil');
+            $table->string('image')->nullable();
             $table->boolean('ativo')->default(1);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

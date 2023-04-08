@@ -64,7 +64,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        if (User::where('perfil', 'admin')->first()) {
+        if (User::where('perfil', 'Administrador')->first()) {
             abort(403);
         }
 
@@ -72,7 +72,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'perfil' => 'admin',
+            'perfil' => 'Administrador',
         ]);
     }
 }

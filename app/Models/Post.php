@@ -13,6 +13,8 @@ class Post extends Model
         'title',
         'content',
         'tipo',
+        'image',
+        'video',
         'user_id',
     ];
 

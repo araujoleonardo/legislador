@@ -16,6 +16,15 @@
 
     <!-- Styles -->
     <link href="{{ asset('dist/css/style.min.css') }}" rel="stylesheet">
+
+    <style>
+        .image-rounded {
+            width: 40px; /* width of container */
+            height: 40px; /* height of container */
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    </style>
     
     @yield('css')
 
@@ -98,12 +107,22 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ asset('img/1.jpg') }}" alt="user" class="rounded-circle" width="31"></a>
+                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @if (Auth::user()->image)
+                                        <img src="{{ asset('img/users/' . Auth::user()->image) }}" alt="user" class="image-rounded" width="31">
+                                    @else
+                                        <img src="{{ asset('img/users/avatar.png') }}" alt="user" class="image-rounded" width="31">
+                                    @endif
+                                </a>
                                 <div class="dropdown-menu dropdown-menu-right user-dd animated">
 
                                     <a class="dropdown-item" href="javascript:void(0)">
-                                        <img src="{{ asset('img/1.jpg') }}" alt="user" class="rounded-circle" width="31">
-                                        {{ Auth::user()->name }} /
+                                        @if (Auth::user()->image)
+                                            <img src="{{ asset('img/users/' . Auth::user()->image) }}" alt="user" class="image-rounded" width="31">
+                                        @else
+                                            <img src="{{ asset('img/users/avatar.png') }}" alt="user" class="image-rounded" width="31">
+                                        @endif
+                                        {{ Auth::user()->name }} |
                                         {{ Auth::user()->perfil }} 
                                     </a>
 

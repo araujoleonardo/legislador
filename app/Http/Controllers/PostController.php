@@ -15,8 +15,8 @@ class PostController extends Controller
      */
     public function welcome()
     {
-        $posts = Post::with('user:id,name')
-            ->get();
+        $posts = Post::with('user:id,name,image')
+            ->orderBy('created_at', 'desc')->get();
 
         return view('welcome', compact('posts'));
     }
@@ -45,10 +45,57 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->content = $request->content;
         $post->user_id = $user->id;
+
+        // Image Upload
+        if($request->hasFile('image') && $request->file('image')->isValid()) {
+
+            $requestImage = $request->image;
+
+            $extension = $requestImage->extension();
+
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+
+            $requestImage->move(public_path('img/posts'), $imageName);
+
+            $post->image = $imageName;
+
+        }
+
+        if($request->video) {
+
+            $video = $this->youtube_embed($request->video);
+
+            $post->video = $video;
+        }
+
         $post->save();
 
         return redirect()->route('post-create')->with('status', 'Post feito com sucesso!');
     }
+
+    public function youtube_embed($url)
+    {
+        // Verifica se o URL fornecido é válido
+        if (empty($url)) {
+            return '';
+        }
+
+        // Extrai o ID do vídeo do URL fornecido
+        if (strpos($url, 'youtu.be') !== false) {
+            $video_id = substr($url, strpos($url, 'youtu.be/') + 9);
+        } else {
+            parse_str(parse_url($url, PHP_URL_QUERY), $query_params);
+            $video_id = $query_params['v'] ?? '';
+        }
+
+        // Monta o código embed para o vídeo do YouTube
+        if (!empty($video_id)) {
+            return '<iframe src="https://www.youtube.com/embed/'.$video_id.'" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        }
+
+        return '';
+    }
+
 
     /**
      * Display the specified resource.
