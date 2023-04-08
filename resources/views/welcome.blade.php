@@ -24,6 +24,19 @@
         .collapsible-link[aria-expanded="true"]::before {
             content: "-";
         }
+
+        iframe {
+            width: 100%;
+        }
+
+        .image-post {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 
 @endsection
@@ -35,7 +48,7 @@
 
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h4 class="card-subtitle"> Fóruns </h4>
+                    <h3 class="card-title text-center">Fóruns</h3>
                     <hr class="my-3">
 
                     <!-- Accordion -->
@@ -48,7 +61,7 @@
                                     <button type="button" data-toggle="collapse" data-target="#collapseOne"
                                         aria-expanded="false" aria-controls="collapseOne"
                                         class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">
-                                        Forum Popular
+                                        Fórum Popular
                                     </button>
                                 </h2>
                             </div>
@@ -69,7 +82,7 @@
                                     <button type="button" data-toggle="collapse" data-target="#collapseTwo"
                                         aria-expanded="false" aria-controls="collapseTwo"
                                         class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">
-                                        Petições públicas
+                                        Petições Públicas
                                     </button>
                                 </h2>
                             </div>
@@ -90,7 +103,7 @@
                                     <button type="button" data-toggle="collapse" data-target="#collapseThree"
                                         aria-expanded="false" aria-controls="collapseThree"
                                         class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">
-                                        Projetos de lei
+                                        Projetos de Lei
                                     </button>
                                 </h2>
                             </div>
@@ -145,30 +158,54 @@
                     @foreach ($posts as $post)
                         <tr>
                             <td>
-                                <div class="card shadow-sm">
+                                <div class="card shadow-sm p-2">
                                     <div class="card-body">
                                         <h6 class="card-subtitle text-success"><i class="fa fa-university"></i> Popular
                                         </h6>
-                                        <hr class="my-3">
-                                        <div class="row">
-                                            <div class="">
-                                                {!! $post->video !!}
+
+                                        <hr>
+
+                                        @if ($post->video || $post->image)
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    @if ($post->video)
+                                                        {!! $post->video !!}
+                                                    @else
+                                                        <img src="{{ asset('img/posts/' . $post->image) }}" alt="post" class="image-post">
+                                                    @endif
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <h3 class="card-title">
+                                                        <a href="#"> {{ $post->title }} </a>
+                                                    </h3>
+                                                    <p class="card-text texto-cortado" style="font-size: 20px">
+                                                        {{ $post->content }}
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <div class="">
-                                                <h4 class="card-title">
-                                                    <a href="#"> {{ $post->title }} </a>
-                                                </h4>
-                                                <p class="card-text">
-                                                    {{ $post->content }}
-                                                </p>
+                                        @else
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h3 class="card-title">
+                                                        <a href="#"> {{ $post->title }} </a>
+                                                    </h3>
+                                                    <p class="card-text texto-cortado" style="font-size: 20px">
+                                                        {{ $post->content }}
+                                                    </p>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <hr class="my-3">
+                                        @endif
+
+                                        <hr>
+
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="d-flex align-items-center author">
                                                 <a href="#">
-                                                    <img src="http://adamthemes.com/demo/code/cards/images/avatar2.png"
-                                                        alt="..." class="rounded-circle" width="50">
+                                                    @if ($post->user->image)
+                                                        <img src="{{ asset('img/users/' . $post->user->image) }}" alt="user" class="image-rounded" width="31">
+                                                    @else
+                                                        <img src="{{ asset('img/users/avatar.png') }}" alt="user" class="image-rounded" width="31">
+                                                    @endif
                                                     <span class="ms-3">{{ $post->user->name }}</span>
                                                 </a>
                                             </div>
@@ -200,24 +237,27 @@
         {{-- =========================coluna 3========================= --}}
 
         <div class="col-md-2">
-            <div class="card shadow-sm">
-                <div class="card-body text-center">
-                    <h3 class="card-title">Junte-se a nossa comunidade!</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Officia autem assumenda quo laborum ab natus illum
-                        quibusdam quod ratione tempora asperiores nisi eligendi
-                        nemo magnam error ut excepturi, dolor sed?
-                    </p>
-                    <br>
-                    <a href="{{ route('user-create') }}" class="btn btn-success btn-lg w-100">Cadastrar-se</a>
+            @guest
+                <div class="card shadow-sm">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">Junte-se a nossa comunidade!</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            Officia autem assumenda quo laborum ab natus illum
+                            quibusdam quod ratione tempora asperiores nisi eligendi
+                            nemo magnam error ut excepturi, dolor sed?
+                        </p>
+                        <br>
+                        <a href="{{ route('user-create') }}" class="btn btn-success btn-lg w-100">Cadastrar-se</a>
+                    </div>
                 </div>
-            </div>
-
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <a href="{{ route('post-create') }}" class="btn btn-primary btn-lg w-100">Fazer postagem</a>
+            @else
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <a href="{{ route('post-create') }}" class="btn btn-primary btn-lg w-100">Fazer postagem</a>
+                    </div>
                 </div>
-            </div>
+            @endguest       
 
             <div class="card shadow-sm">
                 <div class="card-body">
@@ -229,5 +269,20 @@
 
         </div>
     </div>
+
+@endsection
+
+@section('js')
+
+    <script>
+        const elements = document.querySelectorAll('.texto-cortado')
+        const LIMIT = 250
+        
+        for (let p of elements) {                
+            const aboveLimit = p.innerText.length > LIMIT
+            const dotsOrEmpty = aboveLimit ? '...' : ''
+            p.innerText = p.innerText.substring(0, LIMIT) + dotsOrEmpty
+        }
+    </script>
 
 @endsection

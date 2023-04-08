@@ -107,11 +107,21 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="img/users/{{ Auth::user()->image }}" alt="user" class="image-rounded" width="31"></a>
+                                <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @if (Auth::user()->image)
+                                        <img src="{{ asset('img/users/' . Auth::user()->image) }}" alt="user" class="image-rounded" width="31">
+                                    @else
+                                        <img src="{{ asset('img/users/avatar.png') }}" alt="user" class="image-rounded" width="31">
+                                    @endif
+                                </a>
                                 <div class="dropdown-menu dropdown-menu-right user-dd animated">
 
                                     <a class="dropdown-item" href="javascript:void(0)">
-                                        <img src="img/users/{{ Auth::user()->image }}" alt="user" class="image-rounded" width="31">
+                                        @if (Auth::user()->image)
+                                            <img src="{{ asset('img/users/' . Auth::user()->image) }}" alt="user" class="image-rounded" width="31">
+                                        @else
+                                            <img src="{{ asset('img/users/avatar.png') }}" alt="user" class="image-rounded" width="31">
+                                        @endif
                                         {{ Auth::user()->name }} |
                                         {{ Auth::user()->perfil }} 
                                     </a>

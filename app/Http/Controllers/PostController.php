@@ -15,8 +15,8 @@ class PostController extends Controller
      */
     public function welcome()
     {
-        $posts = Post::with('user:id,name')
-            ->get();
+        $posts = Post::with('user:id,name,image')
+            ->orderBy('created_at', 'desc')->get();
 
         return view('welcome', compact('posts'));
     }
@@ -55,7 +55,7 @@ class PostController extends Controller
 
             $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
 
-            $requestImage->move(public_path('img/users'), $imageName);
+            $requestImage->move(public_path('img/posts'), $imageName);
 
             $post->image = $imageName;
 
@@ -90,7 +90,7 @@ class PostController extends Controller
 
         // Monta o código embed para o vídeo do YouTube
         if (!empty($video_id)) {
-            return '<iframe width="300" src="https://www.youtube.com/embed/'.$video_id.'" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+            return '<iframe src="https://www.youtube.com/embed/'.$video_id.'" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
         }
 
         return '';

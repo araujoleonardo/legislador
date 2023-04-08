@@ -32,6 +32,12 @@ class UserController extends Controller
      */
     public function create()
     {
+        $adminUser = User::where('perfil', 'Administrador')->first();
+
+        if (!$adminUser) {
+            return redirect()->route('register');
+        }
+        
         $regioes = Regiao::orderBy('nome', 'asc')->get();
 
         return view('usuario.cadastro', compact('regioes'));
@@ -45,6 +51,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        
         // $request->validate([
         //     'name' => 'required',
         //     'email' => 'required',
