@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Novo Post')
+@section('title', 'View Post')
 
 @section('css')
 
@@ -27,6 +27,7 @@
 
         iframe {
             width: 100%;
+            aspect-ratio: 16/9;
         }
 
         .image-post {
@@ -148,65 +149,154 @@
             </div>
         </div>
 
-        {{-- =========================Create Post========================= --}}
+        {{-- =========================View Post========================= --}}
 
         <div class="col-md-8">
+            <div class="card shadow-sm col-md-12 p-2">
+                <div class="card-body">
+                    <h6 class="card-subtitle text-success"><i class="fa fa-university"></i> Popular
+                    </h6>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="card-title">
+                                <a href="#"> {{ $post->title }} </a>
+                            </h3>
+                            <p class="card-text texto-cortado" style="font-size: 20px">
+                                {{ $post->content }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        @if ($post->video)
+                            <div class="col-md-6">
+                                {!! $post->video !!}
+                            </div>
+                            @if($post->image)
+                                <div class="col-md-6">
+                                    <img src="{{ asset('img/posts/' . $post->image) }}" alt="post" class="image-post">
+                                </div>
+                            @endif
+                        @elseif($post->image)
+                            <div class="col-md-6">
+                                <img src="{{ asset('img/posts/' . $post->image) }}" alt="post" class="image-post">
+                            </div>
+                        @else
+                            <div class="col-md-12"></div>
+                        @endif
+
+                    </div>
+
+                    <hr>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center author">
+                            <a href="#">
+                                @if ($post->user->image)
+                                    <img src="{{ asset('img/users/' . $post->user->image) }}" alt="user" class="image-rounded" width="31">
+                                @else
+                                    <img src="{{ asset('img/users/avatar.png') }}" alt="user" class="image-rounded" width="31">
+                                @endif
+                                <span class="ms-3">{{ $post->user->name }}</span>
+                            </a>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <span class="text-dark" style="font-size: 15px">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    {{$post->created_at->format('d/m/Y')}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <form id="regForm" class="user" method="POST" action="{{ route('post-store') }}" enctype="multipart/form-data">
+                    <form id="regForm" class="user" method="POST" action="{{ route('post-coment') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="">
-                            <label for="title" class="did-floating-label text-md-end mb-2">{{ __('Titulo do post:') }}</label>
-                            <input id="title" type="text" class="form-control did-floating-input @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" autocomplete="title" autofocus>
+                            <label for="comentario" class="did-floating-label text-md-end mb-2">{{ __('Comentário') }}</label>
+                            <textarea id="comentario" class="form-control did-floating-input @error('comentario') is-invalid @enderror" name="comentario" value="{{ old('comentario') }}" rows="3"></textarea>
 
-                            @error('title')
+                            @error('comentario')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                        </div>
 
-                        <br>
-
-                        <div class="">
-                            <label for="content" class="did-floating-label text-md-end mb-2">{{ __('Conteúdo:') }}</label>
-                            <textarea id="content" class="form-control did-floating-input @error('content') is-invalid @enderror" name="content" value="{{ old('content') }}" rows="5"></textarea>
-
-                            @error('content')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-                        <br>
-
-                        <div class="row mt-3">
-                            <div class="col-sm-6">
-                                <label for="video" class="did-floating-label text-md-end mb-2">{{ __('Url do Youtube:') }}</label>
-                                <input id="video" type="text" class="form-control did-floating-input @error('video') is-invalid @enderror" name="video" value="{{ old('video') }}" autocomplete="video">
-
-                                @error('video')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-
-                            <div class="col-sm-6">
-                                <label for="image" class="did-floating-label text-md-end mb-2">{{ __('Imagem:') }}</label>
-                                <div class="custom-file mb-3">
-                                    <input type="file" class="custom-file-input" id="image" name="image">
-                                    <label class="custom-file-label" for="customFile">Clique para selecionar</label>
-                                </div>
-                            </div>
+                            <input type="hidden" value="{{ $post->id }}" name="post_id" id="post_id">
                         </div>
 
                         <br>
 
                         <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Postar</button>
                     </form>
+                </div>
+            </div>
+
+            {{-- =======================Comentarios====================== --}}
+
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5>Comentários</h5>
+                    <table style="width: 100%">
+                        <tbody>
+                        @if ($count != 0)
+                            @foreach ($coments as $coment)
+                                <tr>
+                                    <td>
+                                        <div class="card shadow-sm col-md-12 p-2 border">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <p class="card-text" style="font-size: 15px">
+                                                            {{ $coment->comentario }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <hr>
+
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div class="d-flex align-items-center author">
+                                                        <a href="#">
+                                                            usuario
+                                                        </a>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <div>
+                                                            <span class="text-dark" style="font-size: 15px">
+                                                                <i class="fas fa-calendar-alt"></i>
+                                                                {{$coment->created_at->format('d/m/Y')}}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @else
+                            <tr>
+                                <td>
+                                    <div class="card shadow-sm p-2">
+                                        <div class="card-body">
+                                            <p class="text-center">Ainda não existem comentários para este post!</p>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endif
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

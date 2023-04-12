@@ -32,12 +32,15 @@ Route::post('/usuario/store',   [UserController::class, 'store'])->name('user-st
 
 
 //regiao
-Route::get('/regiao',          [RegiaoController::class, 'listar'])->name('regiao-list');
-Route::get('/regiao/create',   [RegiaoController::class, 'create'])->name('regiao-create');
-Route::post('/regiao/store',   [RegiaoController::class, 'store'])->name('regiao-store');
+Route::get('/regiao',           [RegiaoController::class, 'listar'])->name('regiao-list');
+Route::get('/regiao/create',    [RegiaoController::class, 'create'])->name('regiao-create');
+Route::post('/regiao/store',    [RegiaoController::class, 'store'])->name('regiao-store');
 
 
 //Posts
-Route::get('/',              [PostController::class, 'welcome'])->name('post-list');
-Route::get('/post/create',   [PostController::class, 'create'])->name('post-create');
-Route::post('/post/store',   [PostController::class, 'store'])->name('post-store');
+Route::get('/',                 [PostController::class, 'welcome'])->name('post-list');
+Route::get('/post/create',      [PostController::class, 'create'])->name('post-create');
+Route::post('/post/store',      [PostController::class, 'store'])->name('post-store');
+
+Route::get('post/show/{id}',    [PostController::class, 'show'])->name('post-show');
+Route::post('/post/coment',     [PostController::class, 'postComent'])->name('post-coment');

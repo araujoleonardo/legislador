@@ -175,7 +175,7 @@
                                                     </div>
                                                     <div class="col-md-9">
                                                         <h3 class="card-title">
-                                                            <a href="#"> {{ $post->title }} </a>
+                                                            <a href="{{ route('post-show', $post->id) }}"> {{ $post->title }} </a>
                                                         </h3>
                                                         <p class="card-text texto-cortado" style="font-size: 20px">
                                                             {{ $post->content }}
@@ -186,7 +186,7 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <h3 class="card-title">
-                                                            <a href="#"> {{ $post->title }} </a>
+                                                            <a href="{{ route('post-show', $post->id) }}"> {{ $post->title }} </a>
                                                         </h3>
                                                         <p class="card-text texto-cortado" style="font-size: 20px">
                                                             {{ $post->content }}
@@ -212,7 +212,7 @@
                                                     <div class="mr-3">
                                                         <span class="text-dark" style="font-size: 15px">
                                                             <i class="fas fa-comment-dots"></i>
-                                                            145
+                                                            {{ $post->coments->count() }}
                                                         </span>
                                                     </div>
 
@@ -267,7 +267,7 @@
                         <a href="{{ route('post-create') }}" class="btn btn-primary btn-lg w-100">Fazer postagem</a>
                     </div>
                 </div>
-            @endguest       
+            @endguest
 
             <div class="card shadow-sm">
                 <div class="card-body">
@@ -284,7 +284,14 @@
 @section('js')
 
     <script>
-        
+        const elements = document.querySelectorAll('.texto-cortado')
+        const LIMIT = 250
+
+        for (let p of elements) {
+            const aboveLimit = p.innerText.length > LIMIT
+            const dotsOrEmpty = aboveLimit ? ' ...' : ''
+            p.innerText = p.innerText.substring(0, LIMIT) + dotsOrEmpty
+        }
     </script>
 
 @endsection

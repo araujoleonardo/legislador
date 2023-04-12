@@ -8,4 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class PostComent extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'comentario',
+        'post_id',
+        'user_id',
+    ];
+
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
+
+    public function post()
+    {
+        return $this->hasOne(Post::class);
+    }
 }

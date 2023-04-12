@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\PostComent;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,7 @@ class PostController extends Controller
     public function welcome()
     {
         $posts = Post::with('user:id,name,image')
+            ->with('coments')
             ->orderBy('created_at', 'desc')->get();
 
         $count = Post::count();
@@ -108,7 +110,26 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        $coments = PostComent::where('post_id', $id)->get();
+
+        $count = $coments->count();
+
+        return view('post.viewPost', compact('post', 'coments', 'count'));
+    }
+
+    public function postComent(Request $request)
+    {
+        $user = auth()->user()->id;
+
+        $coment = new PostComent();
+        $coment->comentario = $request->comentario;
+        $coment->user_id = $user;
+        $coment->post_id = $request->post_id;
+        $coment->save();
+
+        return redirect()->back()->with('status', 'Comentario feito com sucesso!');
     }
 
     /**
