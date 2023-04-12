@@ -159,7 +159,7 @@
                         <div class="">
                             <label for="title" class="did-floating-label text-md-end mb-2">{{ __('Titulo do post:') }}</label>
                             <input id="title" type="text" class="form-control did-floating-input @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" autocomplete="title" autofocus>
-        
+
                             @error('title')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -172,26 +172,26 @@
                         <div class="">
                             <label for="content" class="did-floating-label text-md-end mb-2">{{ __('Conteúdo:') }}</label>
                             <textarea id="content" class="form-control did-floating-input @error('content') is-invalid @enderror" name="content" value="{{ old('content') }}" rows="5"></textarea>
-        
+
                             @error('content')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
-                            @enderror                            
+                            @enderror
                         </div>
 
                         <br>
-                        
+
                         <div class="row mt-3">
                             <div class="col-sm-6">
                                 <label for="video" class="did-floating-label text-md-end mb-2">{{ __('Url do Youtube:') }}</label>
                                 <input id="video" type="text" class="form-control did-floating-input @error('video') is-invalid @enderror" name="video" value="{{ old('video') }}" autocomplete="video">
-            
+
                                 @error('video')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror                            
+                                @enderror
                             </div>
 
                             <div class="col-sm-6">
@@ -235,13 +235,12 @@
                         <a href="{{ route('post-create') }}" class="btn btn-primary btn-lg w-100">Fazer postagem</a>
                     </div>
                 </div>
-            @endguest       
+            @endguest
 
             <div class="card shadow-sm">
                 <div class="card-body">
                     <h5 class="card-title">DESTAQUE</h5>
-                    <img class="card-img-top rounded" src="http://adamthemes.com/demo/code/cards/images/blog01.jpeg"
-                        alt="">
+                    <img class="card-img-top rounded" src="{{ asset('img/destaque.jpg') }}" alt="destaque">
                 </div>
             </div>
 

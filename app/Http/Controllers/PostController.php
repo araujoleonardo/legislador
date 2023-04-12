@@ -18,7 +18,10 @@ class PostController extends Controller
         $posts = Post::with('user:id,name,image')
             ->orderBy('created_at', 'desc')->get();
 
-        return view('welcome', compact('posts'));
+        $count = Post::count();
+
+        return view('welcome', compact('posts', 'count'));
+
     }
 
     /**

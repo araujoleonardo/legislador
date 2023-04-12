@@ -124,12 +124,11 @@
                 <div class="card-body">
                     <h5 class="card-title">Intereses</h5>
                     <p>
-                        <span class="badge badge-primary">News</span>
-                        <span class="badge badge-primary">W3Schools</span>
-                        <span class="badge badge-success">Labels</span>
-                        <span class="badge badge-info">Football</span>
-                        <span class="badge badge-warning">Gaming</span>
-                        <span class="badge badge-danger">Friends</span>
+                        <span class="badge badge-primary">Notícias</span>
+                        <span class="badge badge-success">Esportes</span>
+                        <span class="badge badge-info">Viagens</span>
+                        <span class="badge badge-warning">Games</span>
+                        <span class="badge badge-danger">Amigos</span>
                     </p>
                 </div>
             </div>
@@ -152,84 +151,95 @@
         {{-- =========================Posts========================= --}}
 
         <div class="col-md-8">
-
-            <table>
+            <table style="width: 100%">
                 <tbody>
-                    @foreach ($posts as $post)
-                        <tr>
-                            <td>
-                                <div class="card shadow-sm p-2">
-                                    <div class="card-body">
-                                        <h6 class="card-subtitle text-success"><i class="fa fa-university"></i> Popular
-                                        </h6>
+                    @if ($count != 0)
+                        @foreach ($posts as $post)
+                            <tr>
+                                <td>
+                                    <div class="card shadow-sm col-md-12 p-2">
+                                        <div class="card-body">
+                                            <h6 class="card-subtitle text-success"><i class="fa fa-university"></i> Popular
+                                            </h6>
 
-                                        <hr>
+                                            <hr>
 
-                                        @if ($post->video || $post->image)
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    @if ($post->video)
-                                                        {!! $post->video !!}
-                                                    @else
-                                                        <img src="{{ asset('img/posts/' . $post->image) }}" alt="post" class="image-post">
-                                                    @endif
+                                            @if ($post->video || $post->image)
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        @if ($post->video)
+                                                            {!! $post->video !!}
+                                                        @else
+                                                            <img src="{{ asset('img/posts/' . $post->image) }}" alt="post" class="image-post">
+                                                        @endif
+                                                    </div>
+                                                    <div class="col-md-9">
+                                                        <h3 class="card-title">
+                                                            <a href="#"> {{ $post->title }} </a>
+                                                        </h3>
+                                                        <p class="card-text texto-cortado" style="font-size: 20px">
+                                                            {{ $post->content }}
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-9">
-                                                    <h3 class="card-title">
-                                                        <a href="#"> {{ $post->title }} </a>
-                                                    </h3>
-                                                    <p class="card-text texto-cortado" style="font-size: 20px">
-                                                        {{ $post->content }}
-                                                    </p>
+                                            @else
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <h3 class="card-title">
+                                                            <a href="#"> {{ $post->title }} </a>
+                                                        </h3>
+                                                        <p class="card-text texto-cortado" style="font-size: 20px">
+                                                            {{ $post->content }}
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        @else
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <h3 class="card-title">
-                                                        <a href="#"> {{ $post->title }} </a>
-                                                    </h3>
-                                                    <p class="card-text texto-cortado" style="font-size: 20px">
-                                                        {{ $post->content }}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        @endif
+                                            @endif
 
-                                        <hr>
+                                            <hr>
 
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="d-flex align-items-center author">
-                                                <a href="#">
-                                                    @if ($post->user->image)
-                                                        <img src="{{ asset('img/users/' . $post->user->image) }}" alt="user" class="image-rounded" width="31">
-                                                    @else
-                                                        <img src="{{ asset('img/users/avatar.png') }}" alt="user" class="image-rounded" width="31">
-                                                    @endif
-                                                    <span class="ms-3">{{ $post->user->name }}</span>
-                                                </a>
-                                            </div>
                                             <div class="d-flex justify-content-between align-items-center">
-                                                <div class="mr-3">
-                                                    <span class="text-dark" style="font-size: 15px">
-                                                        <i class="fas fa-comment-dots"></i>
-                                                        145
-                                                    </span>
+                                                <div class="d-flex align-items-center author">
+                                                    <a href="#">
+                                                        @if ($post->user->image)
+                                                            <img src="{{ asset('img/users/' . $post->user->image) }}" alt="user" class="image-rounded" width="31">
+                                                        @else
+                                                            <img src="{{ asset('img/users/avatar.png') }}" alt="user" class="image-rounded" width="31">
+                                                        @endif
+                                                        <span class="ms-3">{{ $post->user->name }}</span>
+                                                    </a>
                                                 </div>
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div class="mr-3">
+                                                        <span class="text-dark" style="font-size: 15px">
+                                                            <i class="fas fa-comment-dots"></i>
+                                                            145
+                                                        </span>
+                                                    </div>
 
-                                                <div>
-                                                    <span class="text-dark" style="font-size: 15px">
-                                                        <i class="fas fa-eye"></i>
-                                                        15
-                                                    </span>
+                                                    <div>
+                                                        <span class="text-dark" style="font-size: 15px">
+                                                            <i class="fas fa-eye"></i>
+                                                            15
+                                                        </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <tr>
+                            <td>
+                                <div class="card shadow-sm p-2">
+                                    <div class="card-body">
+                                        <h2 class="text-center">Ainda não existem postagens!</h2>
+                                    </div>
                                 </div>
                             </td>
                         </tr>
-                    @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>
@@ -262,8 +272,7 @@
             <div class="card shadow-sm">
                 <div class="card-body">
                     <h5 class="card-title">DESTAQUE</h5>
-                    <img class="card-img-top rounded" src="http://adamthemes.com/demo/code/cards/images/blog01.jpeg"
-                        alt="">
+                    <img class="card-img-top rounded" src="{{ asset('img/destaque.jpg') }}" alt="destaque">
                 </div>
             </div>
 
@@ -275,14 +284,7 @@
 @section('js')
 
     <script>
-        const elements = document.querySelectorAll('.texto-cortado')
-        const LIMIT = 250
         
-        for (let p of elements) {                
-            const aboveLimit = p.innerText.length > LIMIT
-            const dotsOrEmpty = aboveLimit ? '...' : ''
-            p.innerText = p.innerText.substring(0, LIMIT) + dotsOrEmpty
-        }
     </script>
 
 @endsection
