@@ -51,6 +51,7 @@
 @section('content')
 
     <div class="container">
+        @include('includes.messages')
         <div class="card border-0 shadow-sm my-5">
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
@@ -61,6 +62,12 @@
                             <form id="regForm" class="user" method="POST" action="{{ route('user-store') }}"
                                 enctype="multipart/form-data">
                                 @csrf
+
+                                @error('image')
+                                    <div class="alert alert-danger">
+                                        <span>{{ $message }}</span>
+                                    </div>
+                                @enderror
 
                                 <h5 class="text-center text-gray-900 mb-4 text-primary">Dados pessoais</h5>
                                 <hr>
@@ -78,9 +85,9 @@
                                     <div class="col-sm-9 mt-2 mb-sm-0">
                                         <div class="">
                                             <label for="name"
-                                                class="did-floating-label text-md-end mb-2">{{ __('Nome completo') }}</label>
+                                                class="text-md-end mb-2">{{ __('Nome completo*') }}</label>
                                             <input id="name" type="text"
-                                                class="form-control did-floating-input @error('name') is-invalid @enderror"
+                                                class="form-control @error('name') is-invalid @enderror"
                                                 name="name" value="{{ old('name') }}" autocomplete="name" autofocus>
 
                                             @error('name')
@@ -92,9 +99,9 @@
 
                                         <div class="mt-4">
                                             <label for="sexo"
-                                                class="did-floating-label text-md-end mb-2">{{ __('Sexo') }}</label>
+                                                class="text-md-end mb-2">{{ __('Sexo*') }}</label>
                                             <select id="sexo"
-                                                class="form-control did-floating-input @error('sexo') is-invalid @enderror"
+                                                class="form-control @error('sexo') is-invalid @enderror"
                                                 name="sexo" autocomplete="sexo">
                                                 <option value="">Selecione</option>
                                                 <option value="Masculino"
@@ -114,7 +121,7 @@
 
                                         <div class="mt-4">
                                             <label for="dataNascimento"
-                                                class="did-floating-label text-md-end mb-2">{{ __('Data de nascimento') }}</label>
+                                                class="text-md-end mb-2">{{ __('Data de nascimento*') }}</label>
                                             <input id="dataNascimento" type="date"
                                                 class="form-control mydatepicker @error('dataNascimento') is-invalid @enderror"
                                                 name="dataNascimento" value="{{ old('dataNascimento') }}"
@@ -130,7 +137,7 @@
 
                                     <div class="col-sm-6 mt-4 mb-sm-0">
                                         <label for="nomeMae"
-                                            class="did-floating-label text-md-end mb-2">{{ __('Nome da Mãe Completo') }}</label>
+                                            class="text-md-end mb-2">{{ __('Nome da Mãe Completo*') }}</label>
                                         <input id="nomeMae" type="text"
                                             class="did-floating-input form-control @error('nomeMae') is-invalid @enderror"
                                             name="nomeMae" value="{{ old('nomeMae') }}" autocomplete="nomeMae">
@@ -145,7 +152,7 @@
 
                                     <div class="col-sm-6 mt-4 mb-sm-0">
                                         <label for="nomePai"
-                                            class="did-floating-label text-md-end mb-2">{{ __('Nome do Pai Completo') }}</label>
+                                            class="text-md-end mb-2">{{ __('Nome do Pai Completo*') }}</label>
                                         <input id="nomePai" type="text"
                                             class="did-floating-input form-control @error('nomePai') is-invalid @enderror"
                                             name="nomePai" value="{{ old('nomePai') }}" autocomplete="nomePai">
@@ -160,9 +167,9 @@
 
                                     <div class="col-sm-6 mt-4 mb-sm-0">
                                         <label for="estadoCivil"
-                                            class="did-floating-label text-md-end mb-2">{{ __('Estado civil') }}</label>
+                                            class="text-md-end mb-2">{{ __('Estado civil*') }}</label>
                                         <select id="estadoCivil"
-                                            class="form-control did-floating-input @error('estadoCivil') is-invalid @enderror"
+                                            class="form-control @error('estadoCivil') is-invalid @enderror"
                                             name="estadoCivil" autocomplete="estadoCivil">
                                             <option value="">Selecione</option>
                                             <option value="Solteiro"
@@ -194,7 +201,7 @@
 
                                     <div class="col-sm-6 mt-4 mb-sm-0">
                                         <label for="profissao"
-                                            class="did-floating-label text-md-end mb-2">{{ __('Profissão') }}</label>
+                                            class="text-md-end mb-2">{{ __('Profissão*') }}</label>
                                         <input id="profissao" type="text"
                                             class="did-floating-input form-control @error('profissao') is-invalid @enderror"
                                             name="profissao" value="{{ old('profissao') }}" autocomplete="profissao">
@@ -215,7 +222,7 @@
 
                                     <div class="col-sm-12 mt-2 mb-sm-0">
                                         <label for="tituloEleitor"
-                                            class="did-floating-label text-md-end mb-2">{{ __('Título de eleitor') }}</label>
+                                            class="text-md-end mb-2">{{ __('Título de eleitor*') }}</label>
                                         <input id="tituloEleitor" type="text"
                                             class="did-floating-input form-control @error('tituloEleitor') is-invalid @enderror"
                                             name="tituloEleitor" value="{{ old('tituloEleitor') }}"
@@ -230,7 +237,7 @@
 
                                     <div class="col-sm-6 mt-4 mb-sm-0">
                                         <label for="zonaEleitoral"
-                                            class="did-floating-label text-md-end mb-2">{{ __('Zona eleitoral') }}</label>
+                                            class="text-md-end mb-2">{{ __('Zona eleitoral*') }}</label>
                                         <input id="zonaEleitoral" type="text"
                                             class="did-floating-input form-control @error('zonaEleitoral') is-invalid @enderror"
                                             name="zonaEleitoral" value="{{ old('zonaEleitoral') }}"
@@ -245,7 +252,7 @@
 
                                     <div class="col-sm-6 mt-4 mb-sm-0">
                                         <label for="secaoEleitoral"
-                                            class="did-floating-label text-md-end mb-2">{{ __('Seção eleitoral') }}</label>
+                                            class="text-md-end mb-2">{{ __('Seção eleitoral*') }}</label>
                                         <input id="secaoEleitoral" type="text"
                                             class="did-floating-input form-control @error('secaoEleitoral') is-invalid @enderror"
                                             name="secaoEleitoral" value="{{ old('secaoEleitoral') }}"
@@ -260,7 +267,7 @@
 
                                     <div class="col-sm-6 mt-4 mb-sm-0">
                                         <label for="RG"
-                                            class="did-floating-label text-md-end mb-2">{{ __('RG') }}</label>
+                                            class="text-md-end mb-2">{{ __('RG*') }}</label>
                                         <input id="RG" type="text"
                                             class="did-floating-input form-control @error('RG') is-invalid @enderror"
                                             name="RG" value="{{ old('RG') }}" autocomplete="RG">
@@ -274,7 +281,7 @@
 
                                     <div class="col-sm-6 mt-4 mb-sm-0">
                                         <label for="CPF"
-                                            class="did-floating-label text-md-end mb-2">{{ __('CPF') }}</label>
+                                            class="text-md-end mb-2">{{ __('CPF*') }}</label>
                                         <input id="CPF" type="text"
                                             class="did-floating-input form-control @error('CPF') is-invalid @enderror"
                                             name="CPF" value="{{ old('CPF') }}" autocomplete="CPF">
@@ -294,7 +301,7 @@
 
                                     <div class="col-sm-6 mt-2 mb-sm-0">
                                         <label for="cep"
-                                            class="did-floating-label text-md-end mb-2">{{ __('Cep') }}</label>
+                                            class="text-md-end mb-2">{{ __('Cep*') }}</label>
                                         <input id="cep" type="text"
                                             class="did-floating-input form-control @error('cep') is-invalid @enderror"
                                             name="cep" value="{{ old('cep') }}" autocomplete="cep">
@@ -308,7 +315,7 @@
 
                                     <div class="col-sm-6 mt-2 mb-sm-0">
                                         <label for="endereco"
-                                            class="did-floating-label text-md-end mb-2">{{ __('Endereço') }}</label>
+                                            class="text-md-end mb-2">{{ __('Endereço*') }}</label>
                                         <input id="endereco" type="text"
                                             class="did-floating-input form-control @error('endereco') is-invalid @enderror"
                                             name="endereco" value="{{ old('endereco') }}" autocomplete="endereco">
@@ -322,7 +329,7 @@
 
                                     <div class="col-sm-6 mt-4 mb-sm-0">
                                         <label for="numero"
-                                            class="did-floating-label text-md-end mb-2">{{ __('Número') }}</label>
+                                            class="text-md-end mb-2">{{ __('Número') }}</label>
                                         <input id="numero" type="text"
                                             class="did-floating-input form-control @error('numero') is-invalid @enderror"
                                             name="numero" value="{{ old('numero') }}" autocomplete="numero">
@@ -336,7 +343,7 @@
 
                                     <div class="col-sm-6 mt-4 mb-sm-0">
                                         <label for="bairro"
-                                            class="did-floating-label text-md-end mb-2">{{ __('Bairro') }}</label>
+                                            class="text-md-end mb-2">{{ __('Bairro*') }}</label>
                                         <input id="bairro" type="text"
                                             class="did-floating-input form-control @error('bairro') is-invalid @enderror"
                                             name="bairro" value="{{ old('bairro') }}" autocomplete="bairro">
@@ -350,9 +357,9 @@
 
                                     <div class="col-sm-6 mt-4 mb-sm-0">
                                         <label for="id_regiao"
-                                            class="did-floating-label text-md-end mb-2">{{ __('Selecione a região') }}</label>
+                                            class="text-md-end mb-2">{{ __('Região*') }}</label>
                                         <select id="id_regiao"
-                                            class="form-control did-floating-input @error('id_regiao') is-invalid @enderror"
+                                            class="form-control @error('id_regiao') is-invalid @enderror"
                                             name="id_regiao" autocomplete="id_regiao">
                                             <option value="">Selecione</option>
                                             @foreach ($regioes as $regiao)
@@ -371,7 +378,7 @@
 
                                     <div class="col-sm-6 mt-4 mb-sm-0">
                                         <label for="tempoResidencia"
-                                            class="did-floating-label text-md-end mb-2">{{ __('Tempo que reside no município') }}</label>
+                                            class="text-md-end mb-2">{{ __('Tempo que reside no município*') }}</label>
                                         <input id="tempoResidencia" type="text"
                                             class="did-floating-input form-control @error('tempoResidencia') is-invalid @enderror"
                                             name="tempoResidencia" value="{{ old('tempoResidencia') }}"
@@ -393,7 +400,7 @@
 
                                     <div class="col-sm-12 mt-2 mb-sm-0">
                                         <label for="email"
-                                            class="did-floating-label text-md-end mb-2">{{ __('Email') }}</label>
+                                            class="text-md-end mb-2">{{ __('Email*') }}</label>
                                         <input id="email" type="email"
                                             class="did-floating-input form-control @error('email') is-invalid @enderror"
                                             name="email" value="{{ old('email') }}" autocomplete="email">
@@ -407,7 +414,7 @@
 
                                     <div class="col-sm-6 mt-4 mb-sm-0">
                                         <label for="password"
-                                            class="did-floating-label text-md-end mb-2">{{ __('Senha') }}</label>
+                                            class="text-md-end mb-2">{{ __('Senha*') }}</label>
                                         <input id="password" type="password"
                                             class="did-floating-input form-control @error('password') is-invalid @enderror"
                                             name="password" autocomplete="new-password">
@@ -421,7 +428,7 @@
 
                                     <div class="col-sm-6 mt-4 mb-sm-0">
                                         <label for="password-confirm"
-                                            class="did-floating-label text-md-end mb-2">{{ __('Confirmar senha') }}</label>
+                                            class="text-md-end mb-2">{{ __('Confirmar senha*') }}</label>
                                         <input id="password-confirm" class="did-floating-input form-control"
                                             type="password" name="password_confirmation" required
                                             autocomplete="new-password">

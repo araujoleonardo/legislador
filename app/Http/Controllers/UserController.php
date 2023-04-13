@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserRequest;
 use App\Models\Regiao;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -37,7 +37,7 @@ class UserController extends Controller
         if (!$adminUser) {
             return redirect()->route('register');
         }
-        
+
         $regioes = Regiao::orderBy('nome', 'asc')->get();
 
         return view('usuario.cadastro', compact('regioes'));
@@ -49,32 +49,8 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        
-        // $request->validate([
-        //     'name' => 'required',
-        //     'email' => 'required',
-        //     'password' => 'required',
-        //     'sexo' => 'required',
-        //     'dataNascimento' => 'required',
-        //     'nomeMae' => 'required',
-        //     'nomePai' => 'required',
-        //     'estadoCivil' => 'required',
-        //     'profissao' => 'required',
-        //     'tituloEleitor' => 'required',
-        //     'zonaEleitoral' => 'required',
-        //     'secaoEleitoral' => 'required',
-        //     'RG' => 'required',
-        //     'CPF' => 'required',
-        //     'cep' => 'required',
-        //     'endereco' => 'required',
-        //     'numero' => 'required',
-        //     'bairro' => 'required',
-        //     'id_regiao' => 'required',
-        //     'tempoResidencia' => 'required',
-        // ]);
-
         $user = new User();
         $user->name              = $request->name;
         $user->sexo              = $request->sexo;
@@ -115,7 +91,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->route('user-create')->with('status', 'O cadastro foi realizado!');
+        return redirect()->route('user-create')->with('userCreate', 'O cadastro foi realizado!');
 
     }
 
