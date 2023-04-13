@@ -61,7 +61,7 @@
                                     <button type="button" data-toggle="collapse" data-target="#collapseOne"
                                         aria-expanded="false" aria-controls="collapseOne"
                                         class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">
-                                        Fórum Popular
+                                        Petições Públicas
                                     </button>
                                 </h2>
                             </div>
@@ -82,7 +82,7 @@
                                     <button type="button" data-toggle="collapse" data-target="#collapseTwo"
                                         aria-expanded="false" aria-controls="collapseTwo"
                                         class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">
-                                        Petições Públicas
+                                        Abaixo Assinado
                                     </button>
                                 </h2>
                             </div>
@@ -109,6 +109,27 @@
                             </div>
                             <div id="collapseThree" aria-labelledby="headingThree" data-parent="#accordionExample"
                                 class="collapse">
+                                <div class="card-body p-5">
+                                    <p class="font-weight-light m-0">
+                                        Em construção
+                                    </p>
+                                </div>
+                            </div>
+                        </div><!-- End -->
+
+                        <!-- Accordion item 4 -->
+                        <div class="card border">
+                            <div id="headingFor" class="card-header bg-white shadow-sm border-0">
+                                <h2 class="mb-0">
+                                    <button type="button" data-toggle="collapse" data-target="#collapseFor"
+                                        aria-expanded="false" aria-controls="collapseFor"
+                                        class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">
+                                        Eleições
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseFor" aria-labelledby="headingFor" data-parent="#accordionExample"
+                                 class="collapse">
                                 <div class="card-body p-5">
                                     <p class="font-weight-light m-0">
                                         Em construção
@@ -151,6 +172,7 @@
         {{-- =========================Posts========================= --}}
 
         <div class="col-md-8">
+            @include('includes.messages')
             <table style="width: 100%">
                 <tbody>
                     @if ($count != 0)
@@ -219,7 +241,7 @@
                                                     <div>
                                                         <span class="text-dark" style="font-size: 15px">
                                                             <i class="fas fa-eye"></i>
-                                                            15
+                                                            {{ $post->views->count() }}
                                                         </span>
                                                     </div>
                                                 </div>

@@ -59,14 +59,14 @@
                             <div id="headingOne" class="card-header bg-white shadow-sm border-0">
                                 <h2 class="mb-0">
                                     <button type="button" data-toggle="collapse" data-target="#collapseOne"
-                                        aria-expanded="false" aria-controls="collapseOne"
-                                        class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">
-                                        Fórum Popular
+                                            aria-expanded="false" aria-controls="collapseOne"
+                                            class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">
+                                        Petições Públicas
                                     </button>
                                 </h2>
                             </div>
                             <div id="collapseOne" aria-labelledby="headingOne" data-parent="#accordionExample"
-                                class="collapse">
+                                 class="collapse">
                                 <div class="card-body p-5">
                                     <p class="font-weight-light m-0">
                                         Em construção
@@ -80,14 +80,14 @@
                             <div id="headingTwo" class="card-header bg-white shadow-sm border-0">
                                 <h2 class="mb-0">
                                     <button type="button" data-toggle="collapse" data-target="#collapseTwo"
-                                        aria-expanded="false" aria-controls="collapseTwo"
-                                        class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">
-                                        Petições Públicas
+                                            aria-expanded="false" aria-controls="collapseTwo"
+                                            class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">
+                                        Abaixo Assinado
                                     </button>
                                 </h2>
                             </div>
                             <div id="collapseTwo" aria-labelledby="headingTwo" data-parent="#accordionExample"
-                                class="collapse">
+                                 class="collapse">
                                 <div class="card-body p-5">
                                     <p class="font-weight-light m-0">
                                         Em construção
@@ -101,14 +101,35 @@
                             <div id="headingThree" class="card-header bg-white shadow-sm border-0">
                                 <h2 class="mb-0">
                                     <button type="button" data-toggle="collapse" data-target="#collapseThree"
-                                        aria-expanded="false" aria-controls="collapseThree"
-                                        class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">
+                                            aria-expanded="false" aria-controls="collapseThree"
+                                            class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">
                                         Projetos de Lei
                                     </button>
                                 </h2>
                             </div>
                             <div id="collapseThree" aria-labelledby="headingThree" data-parent="#accordionExample"
-                                class="collapse">
+                                 class="collapse">
+                                <div class="card-body p-5">
+                                    <p class="font-weight-light m-0">
+                                        Em construção
+                                    </p>
+                                </div>
+                            </div>
+                        </div><!-- End -->
+
+                        <!-- Accordion item 4 -->
+                        <div class="card border">
+                            <div id="headingFor" class="card-header bg-white shadow-sm border-0">
+                                <h2 class="mb-0">
+                                    <button type="button" data-toggle="collapse" data-target="#collapseFor"
+                                            aria-expanded="false" aria-controls="collapseFor"
+                                            class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">
+                                        Eleições
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseFor" aria-labelledby="headingFor" data-parent="#accordionExample"
+                                 class="collapse">
                                 <div class="card-body p-5">
                                     <p class="font-weight-light m-0">
                                         Em construção
@@ -151,14 +172,17 @@
         {{-- =========================Create Post========================= --}}
 
         <div class="col-md-8">
+            @include('includes.messages')
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <form id="regForm" class="user" method="POST" action="{{ route('post-store') }}" enctype="multipart/form-data">
+                    <form id="regForm" class="user" method="POST" action="{{ route('post-store') }}"
+                          enctype="multipart/form-data">
                         @csrf
 
                         <div class="">
                             <label for="title" class="did-floating-label text-md-end mb-2">{{ __('Titulo do post:') }}</label>
-                            <input id="title" type="text" class="form-control did-floating-input @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" autocomplete="title" autofocus>
+                            <input id="title" type="text" class="form-control did-floating-input @error('title') is-invalid @enderror"
+                                   name="title" value="{{ old('title') }}" autocomplete="title" autofocus>
 
                             @error('title')
                                 <span class="invalid-feedback" role="alert">
@@ -170,8 +194,11 @@
                         <br>
 
                         <div class="">
-                            <label for="content" class="did-floating-label text-md-end mb-2">{{ __('Conteúdo:') }}</label>
-                            <textarea id="content" class="form-control did-floating-input @error('content') is-invalid @enderror" name="content" value="{{ old('content') }}" rows="5"></textarea>
+                            <label for="content"
+                                   class="did-floating-label text-md-end mb-2">{{ __('Conteúdo:') }}</label>
+                            <textarea id="content"
+                                      class="form-control did-floating-input @error('content') is-invalid @enderror"
+                                      name="content" value="{{ old('content') }}" rows="5"></textarea>
 
                             @error('content')
                                 <span class="invalid-feedback" role="alert">
@@ -184,18 +211,22 @@
 
                         <div class="row mt-3">
                             <div class="col-sm-6">
-                                <label for="video" class="did-floating-label text-md-end mb-2">{{ __('Url do Youtube:') }}</label>
-                                <input id="video" type="text" class="form-control did-floating-input @error('video') is-invalid @enderror" name="video" value="{{ old('video') }}" autocomplete="video">
+                                <label for="video"
+                                       class="did-floating-label text-md-end mb-2">{{ __('Url do Youtube:') }}</label>
+                                <input id="video" type="text"
+                                       class="form-control did-floating-input @error('video') is-invalid @enderror"
+                                       name="video" value="{{ old('video') }}" autocomplete="video">
 
                                 @error('video')
-                                    <span class="invalid-feedback" role="alert">
+                                <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
 
                             <div class="col-sm-6">
-                                <label for="image" class="did-floating-label text-md-end mb-2">{{ __('Imagem:') }}</label>
+                                <label for="image"
+                                       class="did-floating-label text-md-end mb-2">{{ __('Imagem:') }}</label>
                                 <div class="custom-file mb-3">
                                     <input type="file" class="custom-file-input" id="image" name="image">
                                     <label class="custom-file-label" for="customFile">Clique para selecionar</label>
@@ -251,7 +282,7 @@
 
 @section('js')
     <script>
-        $(".custom-file-input").on("change", function() {
+        $(".custom-file-input").on("change", function () {
             var fileName = $(this).val().split("\\").pop();
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });

@@ -27,4 +27,9 @@ class Post extends Model
     {
         return $this->hasMany(PostComent::class);
     }
+
+    public function views()
+    {
+        return $this->hasMany(PostView::class);
+    }
 }

@@ -51,12 +51,13 @@
 @section('content')
 
     <div class="container">
+        @include('includes.messages')
         <div class="card border-0 shadow-sm my-5">
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="p-5">                          
+                        <div class="p-5">
 
                             <form id="regForm" class="user" method="POST" action="{{ route('user-store') }}"
                                 enctype="multipart/form-data">
@@ -71,7 +72,7 @@
                                 <h5 class="text-center text-gray-900 mb-4 text-primary">Dados pessoais</h5>
                                 <hr>
 
-                                <div class="form-group row">                                    
+                                <div class="form-group row">
 
                                     <div class="col-sm-3 mt-4 mb-sm-0">
                                         <label class="picture" for="image" tabIndex="0">
@@ -463,7 +464,7 @@
     <script>
         $(document).ready(function() {
             // Adiciona a máscara para o título de eleitor
-            // $("#tituloEleitor").mask("9999.9999.9999");
+            $("#tituloEleitor").mask("9999.9999.9999");
 
             // Adiciona a máscara para o CPF
             $("#CPF").mask("999.999.999-99");

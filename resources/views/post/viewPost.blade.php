@@ -60,14 +60,14 @@
                             <div id="headingOne" class="card-header bg-white shadow-sm border-0">
                                 <h2 class="mb-0">
                                     <button type="button" data-toggle="collapse" data-target="#collapseOne"
-                                        aria-expanded="false" aria-controls="collapseOne"
-                                        class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">
-                                        Fórum Popular
+                                            aria-expanded="false" aria-controls="collapseOne"
+                                            class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">
+                                        Petições Públicas
                                     </button>
                                 </h2>
                             </div>
                             <div id="collapseOne" aria-labelledby="headingOne" data-parent="#accordionExample"
-                                class="collapse">
+                                 class="collapse">
                                 <div class="card-body p-5">
                                     <p class="font-weight-light m-0">
                                         Em construção
@@ -81,14 +81,14 @@
                             <div id="headingTwo" class="card-header bg-white shadow-sm border-0">
                                 <h2 class="mb-0">
                                     <button type="button" data-toggle="collapse" data-target="#collapseTwo"
-                                        aria-expanded="false" aria-controls="collapseTwo"
-                                        class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">
-                                        Petições Públicas
+                                            aria-expanded="false" aria-controls="collapseTwo"
+                                            class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">
+                                        Abaixo Assinado
                                     </button>
                                 </h2>
                             </div>
                             <div id="collapseTwo" aria-labelledby="headingTwo" data-parent="#accordionExample"
-                                class="collapse">
+                                 class="collapse">
                                 <div class="card-body p-5">
                                     <p class="font-weight-light m-0">
                                         Em construção
@@ -102,14 +102,35 @@
                             <div id="headingThree" class="card-header bg-white shadow-sm border-0">
                                 <h2 class="mb-0">
                                     <button type="button" data-toggle="collapse" data-target="#collapseThree"
-                                        aria-expanded="false" aria-controls="collapseThree"
-                                        class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">
+                                            aria-expanded="false" aria-controls="collapseThree"
+                                            class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">
                                         Projetos de Lei
                                     </button>
                                 </h2>
                             </div>
                             <div id="collapseThree" aria-labelledby="headingThree" data-parent="#accordionExample"
-                                class="collapse">
+                                 class="collapse">
+                                <div class="card-body p-5">
+                                    <p class="font-weight-light m-0">
+                                        Em construção
+                                    </p>
+                                </div>
+                            </div>
+                        </div><!-- End -->
+
+                        <!-- Accordion item 4 -->
+                        <div class="card border">
+                            <div id="headingFor" class="card-header bg-white shadow-sm border-0">
+                                <h2 class="mb-0">
+                                    <button type="button" data-toggle="collapse" data-target="#collapseFor"
+                                            aria-expanded="false" aria-controls="collapseFor"
+                                            class="btn btn-link text-dark font-weight-bold text-uppercase collapsible-link">
+                                        Eleições
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseFor" aria-labelledby="headingFor" data-parent="#accordionExample"
+                                 class="collapse">
                                 <div class="card-body p-5">
                                     <p class="font-weight-light m-0">
                                         Em construção
@@ -216,13 +237,14 @@
                 </div>
             </div>
 
+            {{-- Comentario Form --}}
             <div class="card shadow-sm">
                 <div class="card-body">
                     <form id="regForm" class="user" method="POST" action="{{ route('post-coment') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="">
-                            <label for="comentario" class="did-floating-label text-md-end mb-2">{{ __('Comentário') }}</label>
+                            <label for="comentario" class="did-floating-label text-md-end mb-2">{{ __('Fazer Comentário') }}</label>
                             <textarea id="comentario" class="form-control did-floating-input @error('comentario') is-invalid @enderror" name="comentario" value="{{ old('comentario') }}" rows="3"></textarea>
 
                             @error('comentario')
@@ -242,6 +264,8 @@
             </div>
 
             {{-- =======================Comentarios====================== --}}
+
+            @include('includes.messages')
 
             <div class="card shadow-sm">
                 <div class="card-body">
@@ -267,7 +291,12 @@
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <div class="d-flex align-items-center author">
                                                         <a href="#">
-                                                            usuario
+                                                            @if ($coment->user->image)
+                                                                <img src="{{ asset('img/users/' . $coment->user->image) }}" alt="user" class="image-rounded" width="31">
+                                                            @else
+                                                                <img src="{{ asset('img/users/avatar.png') }}" alt="user" class="image-rounded" width="31">
+                                                            @endif
+                                                            <span class="ms-3">{{ $coment->user->name }}</span>
                                                         </a>
                                                     </div>
                                                     <div class="d-flex justify-content-between align-items-center">
