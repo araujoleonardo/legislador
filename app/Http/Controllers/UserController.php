@@ -73,6 +73,7 @@ class UserController extends Controller
         $user->email             = $request->email;
         $user->perfil            = 'Usuario';
         $user->password          = Hash::make($request->password);
+        $user->terms             = 1;
 
         // Image Upload
         if($request->hasFile('image') && $request->file('image')->isValid()) {
