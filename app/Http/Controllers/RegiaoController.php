@@ -42,7 +42,7 @@ class RegiaoController extends Controller
             'detalhes'  => $request['detalhes'],
         ]);
 
-        return redirect()->route('regiao-create')->with('status', 'O cadastro foi realizado!');
+        return redirect()->route('regiao-create')->with('createRegiao', 'Região cadastrada com sucesso!');
     }
 
     /**
@@ -62,9 +62,9 @@ class RegiaoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function editar(Regiao $regiao)
     {
-        //
+        return view('regiao.editar', compact('regiao'));
     }
 
     /**
@@ -76,7 +76,12 @@ class RegiaoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $regiao = Regiao::findOrFail($id);
+        $regiao->nome       = $request->nome;
+        $regiao->detalhes   = $request->detalhes;
+        $regiao->save();
+
+        return redirect()->route('regiao-list')->with('updateRegiao', 'Região atualizada com sucesso!');
     }
 
     /**
@@ -85,8 +90,11 @@ class RegiaoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        $regiao = Regiao::findOrFail($id);
+        $regiao->delete();
+
+        return redirect()->route('regiao-list')->with('sucess', 'Ok');
     }
 }

@@ -18,11 +18,23 @@ class UserController extends Controller
     public function listar()
     {
         $usuarios = User::where('perfil', 'usuario')
-        ->select('id', 'name', 'dataNascimento', 'sexo', 'zonaEleitoral', 'endereco', 'numero', 'id_regiao')
-        ->with('regiao:id,nome')
-        ->get();
+            ->where('ativo', 1)
+            ->select('id', 'name', 'dataNascimento', 'sexo', 'zonaEleitoral', 'endereco', 'numero', 'id_regiao')
+            ->with('regiao:id,nome')
+            ->get();
 
         return view('usuario.listar', compact('usuarios'));
+    }
+
+    public function listarInativos()
+    {
+        $usuarios = User::where('perfil', 'usuario')
+            ->where('ativo', 0)
+            ->select('id', 'name', 'dataNascimento', 'sexo', 'zonaEleitoral', 'endereco', 'numero', 'id_regiao')
+            ->with('regiao:id,nome')
+            ->get();
+
+        return view('usuario.listarInativos', compact('usuarios'));
     }
 
     /**
@@ -102,9 +114,16 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        return view('dashboard.user.detalhes', compact('user'));
+    }
+
+    public function perfil()
+    {
+        $regioes = Regiao::orderBy('nome', 'asc')->get();
+
+        return view('dashboard.user.perfil', compact('regioes'));
     }
 
     /**
@@ -125,9 +144,72 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateDados(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->name         = $request->name;
+        $user->sexo         = $request->sexo;
+        $user->nomeMae      = $request->nomeMae;
+        $user->nomePai      = $request->nomePai;
+        $user->dataNascimento = $request->dataNascimento;
+        $user->estadoCivil  = $request->estadoCivil;
+        $user->profissao    = $request->profissao;
+        $user->zonaEleitoral = $request->zonaEleitoral;
+        $user->secaoEleitoral = $request->secaoEleitoral;
+        $user->RG           = $request->RG;
+
+        $user->save();
+
+        return redirect()->route('user-perfil')->with('update', 'Informações atualizadas com sucesso!');
+    }
+
+    public function updateEndereco(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $user->cep              = $request->cep;
+        $user->endereco         = $request->endereco;
+        $user->numero           = $request->numero;
+        $user->bairro           = $request->bairro;
+        $user->regiao           = $request->regiao;
+        $user->tempoResidencia  = $request->tempoResidencia;
+
+        $user->save();
+
+        return redirect()->route('user-perfil')->with('update', 'Informações atualizadas com sucesso!');
+    }
+
+    public function updateAcesso(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $user->email        = $request->email;
+        $user->password     = $request->password;
+
+        $user->save();
+
+        return redirect()->route('user-perfil')->with('update', 'Informações atualizadas com sucesso!');
+    }
+
+    public function updatePerfil(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        // Image Upload
+        if($request->hasFile('image') && $request->file('image')->isValid()) {
+
+            $requestImage = $request->image;
+
+            $extension = $requestImage->extension();
+
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+
+            $requestImage->move(public_path('img/users'), $imageName);
+
+            $user->image = $imageName;
+        }
+
+        $user->save();
+
+        return redirect()->route('user-perfil')->with('update', 'Informações atualizadas com sucesso!');
     }
 
     /**
@@ -136,8 +218,21 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->ativo = 0;
+        $user->update();
+
+        return redirect()->route('user-list')->with('sucess', 'Ok');
+    }
+
+    public function ativar($id)
+    {
+        $user = User::findOrFail($id);
+        $user->ativo = 1;
+        $user->update();
+
+        return redirect()->route('user-list')->with('sucess', 'Ok');
     }
 }
