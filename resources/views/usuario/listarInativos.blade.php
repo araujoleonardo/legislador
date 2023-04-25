@@ -1,6 +1,6 @@
 @extends('layouts.dash')
 
-@section('title', 'Usuários')
+@section('title', 'Usuários Inativos')
 
 @section('content')
 
@@ -9,7 +9,7 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <span class="mb-0">Usuários / Usuários Ativos</span>
+            <span class="mb-0">Usuários / Usuários Inativos </span>
         </div>
 
         <!-- DataTales Example -->
@@ -47,8 +47,8 @@
                                             </div>
 
                                             <div class="m-1">
-                                                <a class="btn btn-danger btn-sm" title="Inativar" id="form-delete" data-id="{{ $usuario->id }}" href="#">
-                                                    <i class="fas fa-trash"></i>
+                                                <a class="btn btn-success btn-sm" title="Ativar" id="form-delete" data-id="{{ $usuario->id }}" href="#">
+                                                    <i class="fas fa-check"></i>
                                                 </a>
                                             </div>
 
@@ -83,19 +83,19 @@
                 let id = $(this).data('id');
                 Swal.fire({
                     title: 'Tem certeza?',
-                    text: "Você irá inativar este usuário!",
-                    icon: 'warning',
+                    text: "Você irá ativar este usuário!",
+                    icon: 'question',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Sim, inativar!',
+                    confirmButtonText: 'Sim, ativar!',
                     cancelButtonText: 'Cancelar'
                 }).then((result) => {
                     if (result.value) {
                         deleteRecord(id);
                         Swal.fire({
                             title: 'Sucesso!',
-                            text: 'O usuário está inativo.',
+                            text: 'O usuário está ativo.',
                             icon: 'success'
                         }).then((result) => {
                             if (result.isConfirmed) {
@@ -108,7 +108,7 @@
 
             function deleteRecord(id) {
                 $.ajax({
-                    url: '/usuario/delete/' + id,
+                    url: '/usuario/ativar/' + id,
                     type: 'POST',
                     data: {
                         _token: '{!! csrf_token() !!}',
@@ -121,6 +121,7 @@
                     }
                 });
             }
+
 
         </script>
 

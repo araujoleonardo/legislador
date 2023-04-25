@@ -10,8 +10,8 @@
     <title>@yield('title')</title>
 
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicon.png') }}"> 
-    
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/images/favicon.png') }}">
+
     <link href="{{ asset('assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css') }}" rel="stylesheet">
 
     <!-- Styles -->
@@ -25,7 +25,7 @@
             border-radius: 50%;
         }
     </style>
-    
+
     @yield('css')
 
 </head>
@@ -47,48 +47,39 @@
                 <div class="navbar-header" data-logobg="skin5">
                     <!-- This is for the sidebar toggle which is visible on mobile only -->
                     <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
-            
-                    <!-- Logo -->            
+
+                    <!-- Logo -->
                     <a class="navbar-brand" href="/home">
                         <h1>Legislador</h1>
-                    </a>         
-            
-                    <!-- Toggle which is visible on mobile only -->            
+                    </a>
+
+                    <!-- Toggle which is visible on mobile only -->
                     <a class="topbartoggler d-block d-md-none waves-effect waves-light" href="javascript:void(0)" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><i class="ti-more"></i></a>
                 </div>
-        
+
                 <!-- End Logo -->
-        
+
                 <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
-            
+
                     <!-- toggle and nav items -->
-            
+
                     <ul class="navbar-nav float-left mr-auto">
                         <li class="nav-item d-none d-md-block"><a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)" data-sidebartype="mini-sidebar"><i class="mdi mdi-menu font-24"></i></a></li>
-                        <!-- Search -->
                     </ul>
-            
+
                     <!-- Right side toggle and nav items -->
-            
+
                     <ul class="navbar-nav float-right">
-                
-                        <li class="nav-item">
-                            <a class="nav-link waves-effect waves-dark" href="/" title="Home" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-home font-24"></i>
+
+                        <li class="nav-item mr-1">
+                            <a class="nav-link waves-effect waves-dark" href="/" title="Fóruns" aria-haspopup="true" aria-expanded="false">
+                                <i class="mdi mdi-forum font-24"></i>
                             </a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link waves-effect waves-dark" href="" title="Fórum" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-forum font-24"></i>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link waves-effect waves-dark" href="/home" title="Painel" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-view-dashboard font-24"></i>
-                            </a>
-                        </li>
-                
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" title="Notificação" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-bell font-24"></i>
+                        <li class="nav-item dropdown mr-1">
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" title="Notificação" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="mdi mdi-bell font-24"></i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="#">Action</a>
@@ -97,11 +88,13 @@
                                 <a class="dropdown-item" href="#">Something else here</a>
                             </div>
                         </li>
-                
+
                         @guest
                             @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link waves-effect waves-dark" href="{{ route('login') }}" title="Login" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-login font-24"></i>
+                                <li class="nav-item mr-1">
+                                    <a class="nav-link waves-effect waves-dark" href="{{ route('login') }}" title="Login" aria-haspopup="true" aria-expanded="false">
+                                        <i class="mdi mdi-login font-24"></i>
+                                        <span>Login</span>
                                     </a>
                                 </li>
                             @endif
@@ -110,6 +103,7 @@
                                 <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     @if (Auth::user()->image)
                                         <img src="{{ asset('img/users/' . Auth::user()->image) }}" alt="user" class="image-rounded" width="31">
+                                        <span>Login</span>
                                     @else
                                         <img src="{{ asset('img/users/avatar.png') }}" alt="user" class="image-rounded" width="31">
                                     @endif
@@ -122,29 +116,28 @@
                                         @else
                                             <img src="{{ asset('img/users/avatar.png') }}" alt="user" class="image-rounded" width="31">
                                         @endif
-                                        {{ Auth::user()->name }} |
-                                        {{ Auth::user()->perfil }} 
+                                        {{ Auth::user()->perfil }}
                                     </a>
 
                                     <div class="dropdown-divider"></div>
-                                    
-                                    <a class="dropdown-item" href="javascript:void(0)"><i class="ti-user m-r-5 m-l-5"></i> My Profile</a>                                    
 
-                                    <a class="dropdown-item" href="javascript:void(0)"><i class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
+                                    <a class="dropdown-item" href="{{ route('user-perfil') }}">
+                                        <i class="ti-user m-r-5 m-l-5"></i> Perfil
+                                    </a>
 
                                     <div class="dropdown-divider"></div>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        <i class="fa fa-power-off m-r-5 m-l-5"></i> Logout
-                                    </a>                                   
+                                        <i class="fa fa-power-off m-r-5 m-l-5"></i> Sair
+                                    </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
                                 </div>
                             </li>
-                        @endguest                
-                        <!-- User profile and search -->                
+                        @endguest
+                        <!-- User profile and search -->
                     </ul>
                 </div>
             </nav>
@@ -162,8 +155,8 @@
 
                         <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="fas fa-users"></i><span class="hide-menu">Usuário </span></a>
                             <ul aria-expanded="false" class="collapse  first-level">
-                                <li class="sidebar-item"><a href="{{ route('user-list') }}" class="sidebar-link"><i class="fas fa-list"></i><span class="hide-menu"> Listar </span></a></li>
-                                <li class="sidebar-item"><a href="{{ route('user-create') }}" class="sidebar-link"><i class="fas fa-edit"></i><span class="hide-menu"> Cadastrar </span></a></li>
+                                <li class="sidebar-item"><a href="{{ route('user-list') }}" class="sidebar-link"><i class="fas fa-user-plus"></i><span class="hide-menu"> Usuários Ativos </span></a></li>
+                                <li class="sidebar-item"><a href="{{ route('user-listInativos') }}" class="sidebar-link"><i class="fas fa-user-times"></i><span class="hide-menu"> Usuários Inativos </span></a></li>
                             </ul>
                         </li>
 
@@ -173,7 +166,7 @@
                                 <li class="sidebar-item"><a href="{{ route('regiao-create') }}" class="sidebar-link"><i class="fas fa-edit"></i><span class="hide-menu"> Cadastrar </span></a></li>
                             </ul>
                         </li>
-                        
+
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -181,17 +174,17 @@
             <!-- End Sidebar scroll-->
         </aside>
 
-        
+
         <!-- Page wrapper  -->
-        <div class="page-wrapper">    
-            <!-- Container fluid  -->    
-            <div class="container-fluid">        
-                <!-- Start Page Content -->        
+        <div class="page-wrapper">
+            <!-- Container fluid  -->
+            <div class="container-fluid">
+                <!-- Start Page Content -->
                 <main class="">
                     @yield('content')
-                </main>                    
-                <!-- End PAge Content -->        
-            </div>    
+                </main>
+                <!-- End PAge Content -->
+            </div>
         </div>
 
         <!-- End Page wrapper  -->
